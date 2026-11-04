@@ -1239,7 +1239,7 @@ gap:[
 ],
 sort:[
 ["Sort these for a capacitor charging through a resistor.",{"Increases":["p.d. across the capacitor","charge stored","energy stored"],"Decreases":["current","p.d. across the resistor"]},"V(capacitor) + V(resistor) = supply voltage."],
-["Sort these changes to a charging circuit.",{"Takes longer to charge":["use a bigger resistor","use a bigger capacitor"],"Stores more energy when full":["use a bigger capacitor","use a higher supply voltage"],"No effect on the energy stored when full":["use a bigger resistor"]},"R affects the time, not the final charge."]
+["Sort these changes to a charging circuit.",{"Changes only the charging time":["use a bigger resistor","use a smaller resistor"],"Changes the energy stored when full":["use a bigger capacitor","use a higher supply voltage"]},"R affects the time, not the final charge."]
 ],
 order:[
 ["Put these steps in order to find the capacitance of a capacitor by experiment.",["Charge the capacitor to a known p.d.","Measure the charge stored (for example with a coulombmeter).","Repeat for a range of voltages.","Plot charge against p.d.","Find the gradient, which is the capacitance."],"The gradient of Q against V is C."],
@@ -1423,6 +1423,885 @@ write:[
 });
 
 
+/*X3START*/
+const EX3=(key,x)=>{const t=TOPICS.find(t=>t.key===key);t.x3=t.x3||{};for(const k in x)t.x3[k]=(t.x3[k]||[]).concat(x[k]);};
+EX3("mo",{
+mc:[
+["Which quantity is given by the area under an acceleration-time graph?","change in velocity",[["displacement","That is the area under a velocity-time graph."],["acceleration","That is read off the graph."],["distance","Area under a v-t graph."]],"Area under a-t = Δv.",""],
+["Which of the equations of motion does not include time?","v² = u² + 2as",[["v = u + at","Includes t."],["s = ut + ½at²","Includes t."],["s = ½(u + v)t","Includes t."]],"Use v² = u² + 2as when t is not given or needed.",""],
+["A ball is thrown straight up. At the top of its flight, what are its velocity and acceleration?","velocity 0, acceleration 9.8 m/s² downwards",[["velocity 0, acceleration 0","Gravity still acts."],["velocity 9.8 m/s, acceleration 0","Velocity is zero at the top."],["both 9.8 downwards","Velocity is zero at the top."]],"g acts throughout the flight.","h"],
+["A ball is dropped and bounces several times. What does its velocity-time graph look like (down taken as negative)?","straight sloping lines with the same gradient, with sudden jumps from negative to positive at each bounce",[["a smooth curve","Acceleration is constant between bounces."],["horizontal lines","The velocity is changing."],["lines of different gradient each bounce","g is the same each time."]],"Constant gradient g; velocity reverses at each bounce.","h"],
+["A car accelerates uniformly from 8 m/s to 20 m/s over 84 m. What is its acceleration?","2.0 m/s²",[["0.14 m/s²","Use v² = u² + 2as."],["2.8 m/s²","Check: (400 − 64) ÷ 168."],["4.0 m/s²","Divide by 2s, not s."]],"a = (20² − 8²) ÷ (2 × 84) = 336 ÷ 168 = 2.0 m/s².","p"],
+["A stone is dropped from rest down a well and hits the water after 1.5 s. How deep is the well to the water?","11 m",[["15 m","Use s = ½at²."],["7.4 m","Check: 0.5 × 9.8 × 2.25."],["22 m","Do not forget the ½."]],"s = ½ × 9.8 × 1.5² = 11 m.","p"],
+["A ball is projected upwards at 14.7 m/s. How long does it take to reach its highest point?","1.5 s",[["3.0 s","That is the time to return."],["144 s","Divide, do not multiply."],["0.67 s","That is a ÷ u."]],"t = (0 − 14.7) ÷ (−9.8) = 1.5 s.","p"]
+],
+gap:[
+["The [gradient] of a displacement-time graph gives the velocity. The [area] under a velocity-time graph gives the displacement.",["intercept","length"],"Graph skills."],
+["For a projectile launched at an angle, the [horizontal] component of velocity stays constant, and the [vertical] component changes at 9.8 m/s².",["total","resultant"],"Resolve and treat separately."]
+],
+sort:[
+["Sort these: what can each graph give you directly?",{"Displacement-time":["velocity from the gradient"],"Velocity-time":["acceleration from the gradient","displacement from the area"],"Acceleration-time":["change in velocity from the area"]},"Gradients and areas."],
+["Sort the motion of a ball thrown upwards (up positive).",{"Positive":["velocity on the way up"],"Negative":["velocity on the way down","acceleration throughout"],"Zero":["velocity at the top"]},"Sign conventions matter."],
+["Sort these by which equation of motion is best (no other data).",{"v = u + at":["know u, a, t; want v"],"s = ut + ½at²":["know u, a, t; want s"],"v² = u² + 2as":["know u, a, s; want v"]},"Pick the equation without the unwanted quantity."]
+],
+order:[
+["Put the steps in order to solve a uniform acceleration problem.",["List s, u, v, a, t with known values.","Identify the unknown and the unwanted quantity.","Choose the equation that links them.","Substitute and solve, keeping signs consistent."],"suvat method."],
+["Put the steps in order to find the range of a projectile launched at an angle from level ground.",["Resolve the launch velocity into horizontal and vertical parts.","Use the vertical motion to find the time of flight.","Use the horizontal velocity and the time to find the range.","Give the answer in metres."],"Time links the components."],
+["Put these in order of time taken to fall from rest (no air resistance), shortest first.",["4.9 m","19.6 m","44.1 m","78.4 m"],"1 s, 2 s, 3 s, 4 s."]
+],
+build:[
+["Explain how to find the maximum height of a projectile launched at an angle.",["Find the initial vertical component, u sin θ.","At the maximum height the vertical velocity is zero.","Use v² = u² + 2as with a = −9.8 m/s².","Solve for s."],["Use the horizontal component to find the height.","At the top the horizontal velocity is zero."],"Vertical motion only."],
+["Explain why a displacement-time graph for a ball dropped from rest is a curve.",["The ball accelerates uniformly.","Its velocity increases steadily.","The gradient of a displacement-time graph is the velocity.","So the gradient increases and the graph curves."],["The ball moves at a constant velocity.","The ball's acceleration increases."],"s = ½at² is quadratic."],
+["Explain why a velocity-time graph for an object thrown upwards is a single straight line through zero.",["The only force is weight, so the acceleration is constant.","The gradient of the line is −9.8 m/s² throughout.","The velocity decreases to zero at the top.","It then becomes increasingly negative as the object falls."],["The line changes slope at the top.","The line is horizontal at the top."],"Constant gradient."]
+],
+spot:[
+["A car starts at 5 m/s and accelerates at 2 m/s² for 4 s. Find the displacement.",["s = ut + ½at²","s = 5 × 4 + ½ × 2 × 4","s = 24 m","The unit is metres."],1,"t must be squared: s = 20 + ½ × 2 × 16 = 36 m."],
+["A ball is thrown up at 20 m/s. Find its maximum height.",["v = 0 at the top.","v² = u² + 2as","0 = 400 + 2 × 9.8 × s","s = 20 m"],2,"a = −9.8 m/s²: 0 = 400 − 19.6s gives s = 20 m. With +9.8, s would be negative."],
+["A ball is launched at 25 m/s at 30° to the horizontal.",["Horizontal component = 25 cos 30° = 21.7 m/s.","Vertical component = 25 sin 30° = 12.5 m/s.","The horizontal component decreases during the flight.","The vertical component is zero at the top."],2,"The horizontal component is constant (no air resistance)."]
+],
+write:[
+["State what the area under a velocity-time graph represents.",[["displacement|distance","Displacement"]],1,"The area under a velocity-time graph is the displacement."],
+["Explain why the horizontal velocity of a projectile is constant.",[["(no|zero).{0,20}(horizontal|sideways).{0,20}force|horizontal.{0,20}(no|zero|without).{0,20}force","There is no horizontal force"],["(air resistance|drag).{0,20}(ignored|negligible|no)|(ignoring|ignore|neglect).{0,20}air","Air resistance is ignored"],["(newton|first law|no acceleration|unbalanced)","So no horizontal acceleration"]],2,"Ignoring air resistance, there is no horizontal force on the projectile. With no unbalanced force there is no horizontal acceleration, so the horizontal velocity is constant."],
+["Describe how a light gate and card can measure acceleration down a slope.",[["(two|double).{0,20}(card|mask)|double.?mask|two light gates","Use a double mask or two light gates"],["(time|timer).{0,40}(between|each|both)","Measure the times for each section and between them"],["(v ?- ?u|change in velocity).{0,20}(÷|\\/|divid).{0,10}t|a *= *\\(v","a = (v − u) ÷ t"]],2,"Use a double-mask card with one light gate (or a card and two gates). Find u and v from card length ÷ time at each gate, and the time between them. Then a = (v − u) ÷ t."]
+]
+});
+
+EX3("fe",{
+mc:[
+["What is the unit of power?","watt (W)",[["joule (J)","That is energy."],["newton (N)","That is force."],["N s","That is impulse."]],"1 W = 1 J/s.",""],
+["A block sits on a slope. Which component of its weight acts down the slope?","mg sin θ",[["mg cos θ","That is perpendicular to the slope."],["mg","That is the whole weight."],["mg tan θ","Not a component."]],"Resolve the weight parallel to the slope.",""],
+["What is the tension in a lift cable when the lift moves upwards at constant speed?","equal to the weight of the lift",[["more than the weight","That is when accelerating upwards."],["less than the weight","That is when accelerating downwards or slowing on the way up."],["zero","The cable holds the lift."]],"Constant velocity means balanced forces.",""],
+["What is terminal velocity?","the constant velocity reached when the forces on a falling object balance",[["the maximum speed of any object","It depends on the object."],["the speed when hitting the ground","Not necessarily."],["the speed of light","Not related."]],"Air resistance equals weight.",""],
+["Two blocks are pulled along by a string. The front block has a larger mass. Where is the tension in the joining string?","It provides the force to accelerate the rear block only.",[["It equals the total pulling force.","Only part accelerates the rear block."],["It is zero.","The rear block accelerates, so a force acts."],["It accelerates both blocks.","It only acts on the rear block."]],"Consider the rear block on its own: T = m(rear) × a.","h"],
+["A person stands on scales in a lift that is accelerating downwards. What do the scales read?","less than their weight",[["more than their weight","That is accelerating upwards."],["exactly their weight","Only at constant velocity."],["zero","Only in free fall."]],"mg − R = ma, so R < mg.","h"],
+["A 1200 kg lift accelerates upwards at 0.5 m/s². What is the tension in the cable?","12 360 N",[["11 160 N","Accelerating up, T > mg."],["600 N","Add the weight."],["11 760 N","That is the weight alone."]],"T = m(g + a) = 1200 × 10.3 = 12 360 N.","p"],
+["A 2 kg block on a frictionless 30° slope is released. What is its acceleration?","4.9 m/s²",[["9.8 m/s²","That is free fall."],["8.5 m/s²","That uses cos 30°."],["2.5 m/s²","Check: g sin 30°."]],"a = g sin θ = 9.8 × 0.5 = 4.9 m/s².","p"]
+],
+gap:[
+["A force can be resolved into two [components] at right angles. On a slope, the component of weight down the slope is mg [sin] θ.",["vectors","cos"],"Resolving forces."],
+["When an object falls at [terminal] velocity, the air resistance is equal to the [weight].",["maximum","mass"],"Balanced forces."]
+],
+sort:[
+["Sort these lift situations by the scale reading.",{"More than weight":["accelerating upwards","slowing down while moving downwards"],"Equal to weight":["at rest","moving at constant speed"],"Less than weight":["accelerating downwards","slowing down while moving upwards"]},"Look at the direction of the acceleration."],
+["Sort these components of weight on a slope at angle θ.",{"Parallel to slope":["mg sin θ"],"Perpendicular to slope":["mg cos θ"]},"Resolve carefully."],
+["Sort these by the energy formula used.",{"Eₖ = ½mv²":["a moving trolley"],"Eₚ = mgh":["a lifted load"],"E = Fd":["work done pushing a crate"],"E = Pt":["energy from a motor running for a time"]},"Match the energy to its formula."]
+],
+order:[
+["Put the steps in order to find the acceleration of two connected masses.",["Draw the forces on the whole system.","Find the unbalanced force on the system.","Divide by the total mass to find a.","Use one block on its own to find the tension."],"System first, then one part."],
+["Put the stages of a skydiver's fall in order.",["Weight is greater than air resistance; she accelerates.","Air resistance increases as speed increases.","Air resistance equals weight: first terminal velocity.","The parachute opens: air resistance is now bigger, so she slows down.","Forces balance again at a lower terminal velocity."],"Two terminal velocities."],
+["Put the steps in order to find work done against friction on a slope.",["Find the component of weight down the slope.","Find the friction force from the motion.","Find the distance moved along the slope.","Work done = friction × distance."],"E = Fd."]
+],
+build:[
+["Explain the forces on a person in a lift that is slowing down while moving upwards.",["The lift is moving up but its velocity is decreasing.","So its acceleration is downwards.","The unbalanced force must therefore be downwards.","The reaction from the floor is less than the person's weight."],["The person's weight decreases.","The reaction force is greater than the weight."],"Acceleration is the key."],
+["Explain why a car going down a hill can accelerate with the engine off.",["The weight of the car has a component down the slope, mg sin θ.","If this is bigger than friction, there is an unbalanced force.","The unbalanced force acts down the slope.","So the car accelerates, a = F ÷ m."],["The car gains mass going downhill.","Gravity is stronger at the bottom of a hill."],"Component of weight."],
+["Explain how the tension in a towing rope is found when a car tows a caravan.",["Find the acceleration of the car and caravan together.","Consider the caravan on its own.","The unbalanced force on the caravan is tension minus friction on the caravan.","So T = m(caravan) × a + friction on the caravan."],["The tension equals the car's engine force.","The tension is zero if the speed is constant."],"Isolate one body."]
+],
+spot:[
+["A 5 kg box is pulled by a 30 N force at 60° to the horizontal. Find the horizontal component.",["Horizontal component = F cos θ","= 30 cos 60°","= 26 N","This is the force pulling the box along."],2,"30 cos 60° = 15 N; 26 N is 30 sin 60°."],
+["A 70 kg person in a lift accelerating upwards at 1 m/s². Find the reaction force.",["R − mg = ma","R = m(g + a)","R = 70 × (9.8 − 1)","R = 616 N"],2,"Accelerating up: R = 70 × 10.8 = 756 N."],
+["Explain terminal velocity of a falling ball.",["At first, the ball accelerates at 9.8 m/s².","As it speeds up, air resistance increases.","The weight decreases as the ball speeds up.","When air resistance equals the weight, the velocity is constant."],2,"The weight stays the same; air resistance increases."]
+],
+write:[
+["State what is meant by the component of a force.",[["(part|effect|share)","The effective part of the force"],["(direction|particular direction|right angles)","In a particular direction"]],2,"A component is the effective part of a force in a particular direction; a force can be split into two components at right angles."],
+["Explain why the reading on bathroom scales in a lift is greater than normal as the lift starts to go up.",[["accelerat.{0,20}up","The lift accelerates upwards"],["unbalanced.{0,20}up|net.{0,20}up|resultant.{0,20}up","There must be an upward unbalanced force"],["(reaction|R).{0,40}(greater|bigger|more).{0,20}(weight|mg)","So the reaction is greater than the weight"]],2,"The lift accelerates upwards, so there must be an upward unbalanced force on the person. The reaction from the scales is therefore greater than the weight, and the scales read more."],
+["Describe how the forces on a skydiver change after the parachute opens.",[["air resistance.{0,30}(increase|bigger|greater)","Air resistance increases"],["(greater|bigger|more).{0,20}than.{0,20}weight","Air resistance is greater than weight"],["(decelerat|slow)","The skydiver slows down"],["(balance|equal|terminal)","Until forces balance at a new terminal velocity"]],3,"When the parachute opens, air resistance increases and becomes greater than the weight. The skydiver slows down, so air resistance decreases until it equals the weight again at a lower terminal velocity."]
+]
+});
+
+EX3("ce",{
+mc:[
+["What is the unit of momentum?","kg m/s",[["N","That is force."],["J","That is energy."],["kg m/s²","That is force too."]],"p = mv.",""],
+["What is impulse equal to?","the change in momentum",[["the change in kinetic energy","That is work done."],["force ÷ time","Impulse is force × time."],["mass × acceleration","That is force."]],"Ft = Δp.",""],
+["In an inelastic collision, which quantity is not conserved?","kinetic energy",[["momentum","Momentum is always conserved with no external forces."],["total energy","Total energy is always conserved."],["mass","Mass is conserved."]],"Some Eₖ becomes heat and sound.",""],
+["What does the area under a force-time graph give?","impulse",[["work done","That is area under force-displacement."],["power","Power is energy ÷ time."],["acceleration","Not an area."]],"Area under F-t = impulse = Δp.",""],
+["A ball hits a wall and bounces back at the same speed. What is the change in momentum?","2mv",[["0","Momentum is a vector; direction reversed."],["mv","From +mv to −mv is a change of 2mv."],["½mv²","That is energy."]],"Δp = mv − (−mv) = 2mv.","h"],
+["Why does a crumple zone reduce the force on a passenger?","It increases the time of the collision for the same change in momentum.",[["It reduces the change in momentum.","The car still stops, so Δp is the same."],["It increases the mass of the car.","Mass is not changed."],["It stops the car from moving.","It still has to stop."]],"F = Δp ÷ t, so bigger t gives smaller F.","h"],
+["A 2 kg trolley at 3 m/s hits and sticks to a stationary 1 kg trolley. What is their speed afterwards?","2 m/s",[["3 m/s","Total mass increases."],["1.5 m/s","Total mass is 3 kg."],["6 m/s","Divide by the total mass."]],"6 kg m/s ÷ 3 kg = 2 m/s.","p"]
+],
+gap:[
+["The principle of conservation of [momentum] states that the total momentum before a collision equals the total [after], in the absence of external forces.",["energy","during"],"Applies to collisions and explosions."],
+["In an [elastic] collision, both momentum and [kinetic] energy are conserved.",["inelastic","potential"],"Rare in real life, except particles."]
+],
+sort:[
+["Sort these collisions.",{"Elastic":["two snooker balls hardly losing energy","gas molecules colliding"],"Inelastic":["a car crash","a lump of clay sticking to a wall","two trolleys that stick together"]},"Is Eₖ conserved?"],
+["Sort these safety features by how they work.",{"Increase collision time":["crumple zones","airbags","a soft landing mat"],"Spread force over a bigger area":["wide seatbelts"]},"F = Δp ÷ t; p = F ÷ A."],
+["Sort these quantities.",{"Vector":["momentum","impulse","force"],"Scalar":["kinetic energy","mass","time"]},"Momentum has direction."]
+],
+order:[
+["Put the steps in order to solve a collision problem.",["Choose a positive direction.","Write the total momentum before.","Write the total momentum after.","Equate them and solve."],"Signs matter."],
+["Put the steps in order to show whether a collision is elastic.",["Find the velocities before and after.","Calculate the total Eₖ before.","Calculate the total Eₖ after.","Compare: equal means elastic."],"Compare kinetic energy."],
+["Put the steps in order to find an average force from a collision.",["Find the momentum before.","Find the momentum after, with the correct sign.","Find the change in momentum.","Divide by the contact time."],"F = Δp ÷ t."]
+],
+build:[
+["Explain why an explosion from rest gives the two pieces equal and opposite momenta.",["Before the explosion the total momentum is zero.","Momentum is conserved if no external force acts.","So the total momentum after must also be zero.","The two momenta must be equal in size and opposite in direction."],["Explosions create momentum.","Both pieces move in the same direction."],"Total momentum stays zero."],
+["Explain how a follow-through in golf increases the speed of the ball.",["Following through keeps the club in contact with the ball for longer.","This increases the time the force acts.","Impulse = Ft, so the impulse is greater.","A bigger impulse gives a bigger change in momentum, so a faster ball."],["Following through increases the club's mass.","It reduces the force on the ball."],"Longer contact time."],
+["Explain why a bouncing ball experiences a bigger impulse than one that sticks to the floor.",["Momentum is a vector.","A ball that sticks loses all its momentum: Δp = mv.","A ball that bounces back reverses its momentum.","So its change in momentum, and impulse, is bigger."],["The bouncing ball has a smaller change in momentum.","Impulse depends only on mass."],"Direction reversal."]
+],
+spot:[
+["A 0.5 kg ball hits a wall at 4 m/s and bounces back at 3 m/s. Find Δp.",["Take towards the wall as positive.","p before = 0.5 × 4 = 2 kg m/s.","p after = 0.5 × 3 = 1.5 kg m/s.","Δp = 1.5 − 2 = −0.5 kg m/s."],2,"p after = 0.5 × (−3) = −1.5 kg m/s, so Δp = −3.5 kg m/s."],
+["A 1000 kg car at 10 m/s hits a 500 kg car at rest; they stick. Find the speed after.",["Momentum before = 10 000 kg m/s.","Total mass after = 1500 kg.","v = 10 000 ÷ 1500 = 6.7 m/s.","Kinetic energy is conserved."],3,"The collision is inelastic: some Eₖ is lost."],
+["A force-time graph is a triangle with peak 400 N over 0.05 s. Find the impulse.",["Impulse is the area under the graph.","Area = ½ × base × height","Area = 400 × 0.05","Impulse = 20 N s"],2,"½ × 0.05 × 400 = 10 N s."]
+],
+write:[
+["State the principle of conservation of momentum.",[["total momentum.{0,40}before.{0,40}(equal|same).{0,20}after|before.{0,30}equal.{0,30}after","Total momentum before equals total after"],["(no|absence of|without).{0,20}external force","In the absence of external forces"]],2,"The total momentum before a collision equals the total momentum after, in the absence of external forces."],
+["Explain why airbags reduce injuries in a crash.",[["(increase|longer).{0,20}time","Increase the time to stop"],["(same|unchanged).{0,20}(change in momentum|Δp|impulse)|change in momentum","The change in momentum is the same"],["(smaller|less|reduce).{0,20}force","So the force is smaller"]],2,"An airbag increases the time taken for the head to stop. The change in momentum is the same, so F = Δp ÷ t is smaller, causing less injury."],
+["Describe how to show momentum is conserved using trolleys on a track.",[["(light gate|motion sensor|data logger|timer)","Measure velocities with light gates or motion sensors"],["(mass|balance)","Measure the masses"],["(before|after)","Calculate momentum before and after"],["(friction|slope|compensat|level)","Compensate for friction"]],3,"Measure the trolley masses on a balance. Use light gates to measure the velocities before and after the collision. Tilt the track slightly to compensate for friction. Calculate total momentum before and after and compare."]
+]
+});
+
+EX3("gr",{
+mc:[
+["What does the gravitational constant G represent?","the constant in Newton's law of universal gravitation, 6.67 × 10⁻¹¹ N m² kg⁻²",[["the gravitational field strength at Earth's surface","That is g."],["the acceleration of a falling object","That is g."],["the weight of 1 kg","That is g × 1 kg."]],"F = Gm₁m₂/r².",""],
+["Why do we feel the Earth's pull but not the pull of a person next to us?","The force depends on mass, and a person's mass is tiny compared with the Earth's.",[["People have no gravity.","All masses attract."],["The person is too close.","Closer means stronger, not weaker."],["Gravity only acts on planets.","It acts between all masses."]],"G is very small.",""],
+["The distance between two masses is doubled. What happens to the gravitational force?","It falls to a quarter.",[["It halves.","It is an inverse square law."],["It doubles.","It decreases with distance."],["It is unchanged.","It depends on distance."]],"F ∝ 1/r².","h"],
+["Both masses are doubled and the distance is doubled. What happens to the force?","It stays the same.",[["It doubles.","Distance squared also increases by 4."],["It quadruples.","The distance change cancels it."],["It halves.","Check: 2 × 2 ÷ 2² = 1."]],"(2 × 2) ÷ 2² = 1.","h"],
+["What is the gravitational force between two 50 kg pupils 1.0 m apart?","1.7 × 10⁻⁷ N",[["2500 N","Multiply by G."],["3.3 × 10⁻⁹ N","Multiply the masses together."],["1.7 × 10⁻⁹ N","Check: 6.67 × 10⁻¹¹ × 2500."]],"F = 6.67 × 10⁻¹¹ × 50 × 50 ÷ 1² = 1.7 × 10⁻⁷ N.","p"],
+["The Earth (6.0 × 10²⁴ kg) and the Moon (7.3 × 10²² kg) are 3.8 × 10⁸ m apart. What is the force between them?","2.0 × 10²⁰ N",[["7.7 × 10²⁸ N","Divide by r², and multiply by G."],["7.7 × 10¹¹ N","Square the distance."],["2.0 × 10²² N","Check the powers of ten."]],"F = 6.67 × 10⁻¹¹ × 6.0 × 10²⁴ × 7.3 × 10²² ÷ (3.8 × 10⁸)² = 2.0 × 10²⁰ N.","p"],
+["Two masses attract with a force of 12 N. The distance is tripled. What is the new force?","1.3 N",[["4 N","Divide by 3², not 3."],["36 N","The force decreases."],["108 N","The force decreases."]],"12 ÷ 9 = 1.3 N.","p"]
+],
+gap:[
+["Newton's law of universal gravitation says the force is proportional to the product of the [masses] and inversely proportional to the [square] of the distance.",["volumes","cube"],"F = Gm₁m₂/r²."],
+["In F = Gm₁m₂/r², r is the distance between the [centres] of the two masses.",["surfaces","edges"],"Centre to centre."],
+["A satellite in orbit is in [free] fall. The only force on it is [gravity].",["no","thrust"],"It keeps falling round the Earth."]
+],
+sort:[
+["Sort these: what happens to F when this changes alone?",{"Force doubles":["one mass doubled"],"Force quadruples":["both masses doubled","distance halved"],"Force falls to a quarter":["distance doubled"]},"F ∝ m₁m₂/r²."],
+["Sort these: which uses Newton's law of gravitation?",{"Uses it":["force between Earth and Moon","force between Sun and Jupiter"],"Does not need it":["weight of a book on Earth's surface (W = mg is easier)","friction on a sliding box"]},"W = mg is the surface shortcut."],
+["Sort these quantities.",{"Constant everywhere":["G","speed of light"],"Varies with location":["g","weight"]},"G is universal."]
+],
+order:[
+["Put these in order of gravitational force on a 1 kg mass, smallest first.",["far out in deep space","on the Moon's surface","on Mars' surface","on Earth's surface"],"Field strength varies."],
+["Put the steps in order to use Newton's law of gravitation.",["Write down both masses in kg.","Find the distance between the centres in m.","Square the distance.","Calculate F = Gm₁m₂/r²."],"Centre to centre, then square."],
+["Put the steps in order to find r if F, m₁ and m₂ are known.",["Rearrange to r² = Gm₁m₂/F.","Substitute the values.","Calculate r².","Take the square root."],"Do not forget the square root."]
+],
+build:[
+["Explain why the force between two objects on Earth is usually too small to notice.",["The gravitational force depends on the product of the masses.","Everyday masses are small.","G is very small, 6.67 × 10⁻¹¹ N m² kg⁻².","So the force is tiny compared with their weight."],["Everyday objects have no gravity.","The Earth blocks their gravity."],"Small masses, small G."],
+["Explain why astronauts in orbit appear weightless.",["The astronaut and the spacecraft are both in free fall.","They accelerate towards Earth at the same rate.","So there is no reaction force between them.","The astronaut feels weightless, although gravity still acts."],["There is no gravity in orbit.","The astronaut's mass is zero."],"Free fall together."],
+["Explain why the distance in Newton's law is measured from the centres.",["For a sphere, the mass acts as if it were all at its centre.","The force depends on the distance between these points.","Measuring from the surface would give the wrong r.","So use the planet's radius plus the height above the surface."],["The surfaces are where gravity is strongest.","The centre has no mass."],"Centre to centre."]
+],
+spot:[
+["Find the force between 2 kg and 3 kg masses 0.5 m apart.",["F = Gm₁m₂/r²","F = 6.67 × 10⁻¹¹ × 2 × 3 ÷ 0.5","F = 8.0 × 10⁻¹⁰ N","Gravity is always attractive."],1,"r must be squared: ÷ 0.25, giving F = 1.6 × 10⁻⁹ N."],
+["A satellite is 400 km above Earth (radius 6400 km). Find r.",["r is measured from the centre.","r = 6400 km + 400 km","r = 6800 km","r = 6.8 × 10⁵ m"],3,"6800 km = 6.8 × 10⁶ m."],
+["Describe gravitational forces.",["Every mass attracts every other mass.","The force acts along the line joining their centres.","The force on the smaller mass is bigger.","The force decreases with distance."],2,"Newton's third law: the forces are equal and opposite."]
+],
+write:[
+["State Newton's law of universal gravitation in words.",[["(product|multipl).{0,20}mass|masses","Proportional to the product of the masses"],["inverse.{0,20}square|square.{0,30}distance|r ?²","Inversely proportional to the square of the distance"]],2,"Every mass attracts every other mass with a force proportional to the product of their masses and inversely proportional to the square of the distance between their centres."],
+["Explain why the Moon stays in orbit around the Earth.",[["(gravit|attract)","Gravity pulls the Moon towards the Earth"],["(velocity|speed|moving).{0,40}(sideways|tangent|perpendicular|right angles)|tangent","The Moon has a sideways velocity"],["(fall|curve|path|bends|changes direction)","So it keeps falling round the Earth"]],2,"Gravity pulls the Moon towards the Earth. The Moon also has a large sideways velocity, so as it falls its path curves around the Earth instead of hitting it."],
+["The Sun pulls on the Earth. Describe the force the Earth exerts on the Sun.",[["(equal|same) (size|magnitude)|equal","Equal in size"],["opposite","Opposite in direction"]],2,"The Earth pulls on the Sun with a force equal in size and opposite in direction (Newton's third law)."]
+]
+});
+
+EX3("sr",{
+mc:[
+["What is the first postulate of special relativity?","The laws of physics are the same in all inertial frames of reference.",[["Nothing can travel faster than sound.","Light, not sound."],["Time is the same for all observers.","Time is relative."],["Mass is always conserved.","Not a postulate."]],"No preferred frame.",""],
+["What is the second postulate of special relativity?","The speed of light in a vacuum is the same for all observers.",[["Light slows down for moving observers.","It is constant."],["Moving clocks run fast.","They run slow."],["All objects have the same length.","Length contracts."]],"c is constant.",""],
+["What is length contraction?","A moving object is measured to be shorter in its direction of motion by a stationary observer.",[["Objects shrink in all directions when moving.","Only along the motion."],["Objects get longer at high speed.","They get shorter."],["Length changes only at the speed of sound.","It applies at all speeds, noticeably near c."]],"l′ = l√(1 − v²/c²).",""],
+["A spaceship passes Earth at 0.8c. An astronaut on board times her pulse. What does she observe?","Her pulse is normal.",[["Her pulse is slow.","In her own frame nothing changes."],["Her pulse is fast.","No change in her frame."],["Her pulse stops.","Nothing unusual happens."]],"Time dilation is observed from the other frame.","h"],
+["A light pulse is fired forwards from a ship moving at 0.5c. How fast does an Earth observer measure the light?","c",[["1.5c","Light speed does not add."],["0.5c","Light speed is constant."],["2c","Not possible."]],"Second postulate.","h"],
+["A ship moves at 0.6c. One hour passes on board. How long does this take as measured from Earth?","1.25 hours",[["0.8 hours","Moving clocks run slow, so Earth measures longer."],["1.67 hours","γ = 1.25 for 0.6c."],["1 hour","Time dilation applies."]],"γ = 1/√(1 − 0.36) = 1.25.","p"],
+["A 100 m spaceship travels at 0.8c past Earth. What length does an Earth observer measure?","60 m",[["167 m","Moving objects are shorter."],["80 m","l′ = l√(1 − 0.64)."],["100 m","Length contracts."]],"l′ = 100 × √(0.36) = 60 m.","p"]
+],
+gap:[
+["Time [dilation] means a moving clock is measured to run [slow] by a stationary observer.",["contraction","fast"],"t′ = t/√(1 − v²/c²)."],
+["Relativistic effects are only noticeable when an object's speed is close to the speed of [light]. In everyday life they are [negligible].",["sound","enormous"],"γ ≈ 1 at low speeds."],
+["Muons made in the upper atmosphere reach the ground because, in our frame, their [lifetime] is increased by time dilation. In the muon's frame, the atmosphere's [thickness] is contracted.",["mass","speed"],"Classic evidence."]
+],
+sort:[
+["Sort these: measured by an Earth observer for a fast spaceship.",{"Increases":["time between ticks of the ship's clock"],"Decreases":["the length of the ship in its direction of motion"],"Unchanged":["the speed of light from the ship","the height of the ship (perpendicular to motion)"]},"Time dilates, length contracts along v."],
+["Sort these speeds by whether relativity is needed.",{"Relativity needed":["0.9c","an electron at 2.7 × 10⁸ m/s"],"Relativity negligible":["a jet at 300 m/s","the ISS at 7700 m/s"]},"Only near c."],
+["Sort these postulates and consequences.",{"Postulate":["laws of physics same in all inertial frames","speed of light constant for all observers"],"Consequence":["time dilation","length contraction"]},"Two postulates lead to the effects."]
+],
+order:[
+["Put these speeds in order of γ (Lorentz factor), smallest first.",["0.1c","0.5c","0.8c","0.99c"],"γ increases rapidly near c."],
+["Put the steps in order to find a dilated time.",["Identify the proper time t (measured in the moving frame).","Find v/c.","Calculate √(1 − v²/c²).","Divide t by this to get t′."],"t′ > t."],
+["Put the steps in order to explain why muons reach the ground.",["Muons are made high in the atmosphere.","Their half-life is too short to reach the ground at their speed without relativity.","From Earth, their lifetime is dilated because they move close to c.","So many more survive to reach the ground."],"Evidence for time dilation."]
+],
+build:[
+["Explain why an astronaut on a fast ship does not notice time dilation.",["In the astronaut's frame, the ship is at rest.","The laws of physics are the same in all inertial frames.","Her clock ticks normally for her.","Only an observer in another frame measures her clock running slow."],["Time dilation only happens on Earth.","Her watch stops working."],"Effects depend on the frame."],
+["Explain why the speed of light being constant leads to time dilation.",["Imagine a light clock moving past an observer.","The observer sees the light travel a longer, diagonal path.","The speed of light is the same for the observer.","So each tick must take longer in the observer's frame."],["Light speeds up for moving observers.","The clock gets heavier."],"Light clock argument."],
+["Explain why relativity is not noticed in daily life.",["Everyday speeds are tiny compared with c.","So v²/c² is almost zero.","γ is almost exactly 1.","The changes in time and length are far too small to measure normally."],["Relativity only works in space.","Everyday objects move faster than light."],"γ ≈ 1."]
+],
+spot:[
+["A clock on a ship at 0.6c ticks for 10 s. Find the time on Earth.",["γ = 1/√(1 − 0.6²) = 1.25.","t′ = γt","t′ = 10 ÷ 1.25 = 8 s","Moving clocks run slow."],2,"t′ = 10 × 1.25 = 12.5 s."],
+["Describe length contraction.",["The moving object's length is measured as shorter.","It only happens in the direction of motion.","The object feels squashed to people on board.","It is only noticeable near the speed of light."],2,"In its own frame the object has its normal length."],
+["State the postulates of special relativity.",["The laws of physics are the same in all inertial frames.","The speed of light in a vacuum is the same for all observers.","The speed of light depends on the speed of the source.","These lead to time dilation and length contraction."],2,"The speed of light does not depend on the source's speed."]
+],
+write:[
+["State what is meant by time dilation.",[["(moving|motion).{0,30}(clock|time)|clock.{0,30}moving","A moving clock"],["(slow|longer|dilat)","Is measured to run slow"],["(observer|frame)","By an observer in a different frame"]],2,"Time dilation: a stationary observer measures a moving clock to run slow, so a time interval is longer in their frame than in the clock's own frame."],
+["Explain how muons provide evidence for special relativity.",[["(upper|high).{0,20}atmosphere|atmosphere","Muons are made in the upper atmosphere"],["(short|half.?life|lifetime)","They have a short lifetime"],["(dilat|longer)","Their lifetime is dilated in our frame"],["(reach|detect).{0,20}(ground|surface)","So they reach the ground"]],3,"Muons are made in the upper atmosphere and have a very short lifetime. Without relativity few would reach the ground. Because they travel close to c, their lifetime is dilated in our frame, so many reach the ground and are detected."],
+["State one consequence of the speed of light being constant for all observers.",[["time dilation|clocks.{0,20}slow","Time dilation"],["length contraction|shorter","Length contraction"]],1,"Time dilation (moving clocks run slow) or length contraction (moving objects are shorter along their motion)."]
+]
+});
+
+EX3("eu",{
+mc:[
+["What is the Doppler effect?","the change in observed frequency when a source moves relative to an observer",[["the change in speed of sound","Speed in the medium stays the same."],["the bending of waves around obstacles","That is diffraction."],["the reflection of sound","That is an echo."]],"Moving source, changed frequency.",""],
+["What is the cosmic microwave background?","radiation left over from the early hot Universe, now cooled to about 2.7 K",[["light from nearby stars","It comes from all directions equally."],["radio signals from satellites","It is natural."],["microwaves from the Sun","It fills the whole Universe."]],"Evidence for the Big Bang.",""],
+["What does Hubble's law state?","The recession velocity of a galaxy is proportional to its distance.",[["All galaxies move towards us.","They move away."],["Closer galaxies move faster.","Further ones are faster."],["Galaxies do not move.","They recede."]],"v = H₀d.",""],
+["Light from a galaxy has a redshift of 0.05. What can you conclude?","It is moving away at about 0.05c.",[["It is moving towards us.","Redshift means away."],["It is getting hotter.","Redshift is about motion."],["It is 0.05 light years away.","z gives speed, then distance via Hubble's law."]],"z = v/c for v ≪ c.","h"],
+["Why do astronomers think dark matter exists?","Stars at the edges of galaxies orbit too fast for the visible mass alone.",[["They have photographed it.","It cannot be seen directly."],["Galaxies are too bright.","It is about motion."],["The Universe is expanding.","That points to dark energy."]],"Missing mass.","h"],
+["A galaxy recedes at 2.1 × 10⁷ m/s. What is its redshift?","0.07",[["14","Divide v by c."],["6.3 × 10¹⁵","Divide, do not multiply."],["0.7","Check: 2.1 × 10⁷ ÷ 3 × 10⁸."]],"z = v/c = 0.07.","p"],
+["A galaxy is 3.0 × 10²⁴ m away. Using H₀ = 2.3 × 10⁻¹⁸ s⁻¹, what is its recession velocity?","6.9 × 10⁶ m/s",[["1.3 × 10⁴² m/s","Multiply, do not divide."],["7.7 × 10⁻⁴³ m/s","v = H₀d."],["6.9 × 10⁸ m/s","Check the powers of ten."]],"v = 2.3 × 10⁻¹⁸ × 3.0 × 10²⁴ = 6.9 × 10⁶ m/s.","p"],
+["An ambulance siren of 600 Hz approaches at 20 m/s. Sound travels at 340 m/s. What frequency is heard?","638 Hz",[["567 Hz","That is for moving away."],["600 Hz","The source is moving."],["620 Hz","Use the Doppler equation."]],"f₀ = 600 × 340 ÷ (340 − 20) = 638 Hz.","p"]
+],
+gap:[
+["When a source moves [towards] an observer, the observed frequency is [higher].",["away from","lower"],"Doppler effect."],
+["Dark [energy] is used to explain why the expansion of the Universe is [accelerating].",["matter","slowing"],"A mysterious repulsion."]
+],
+sort:[
+["Sort these as evidence for the Big Bang or for dark matter/energy.",{"Big Bang":["cosmic microwave background","redshift of distant galaxies","abundance of hydrogen and helium"],"Dark matter":["fast rotation of galaxy edges"],"Dark energy":["accelerating expansion"]},"Different evidence."],
+["Sort these Doppler situations.",{"Higher frequency heard":["siren approaching","star moving towards us (blueshift)"],"Lower frequency heard":["siren moving away","galaxy receding (redshift)"]},"Towards: higher. Away: lower."],
+["Sort these by what they measure.",{"Hubble's law":["recession velocity from distance"],"Redshift":["speed of a galaxy from its spectrum"],"Peak wavelength of a star":["its surface temperature"]},"Different astronomy tools."]
+],
+order:[
+["Put the steps in order to estimate the age of the Universe.",["Measure the redshift of many galaxies.","Find their recession velocities.","Plot velocity against distance to find H₀.","Age ≈ 1 ÷ H₀."],"t = d/v = 1/H₀."],
+["Put these in order of peak wavelength of emission, shortest first.",["a blue star","the Sun","a red star","the cosmic microwave background"],"Hotter objects peak at shorter wavelengths."],
+["Put the stages in order for the history of the Universe.",["Big Bang, very hot and dense.","Universe expands and cools.","Atoms form and light is released (the CMB).","Stars and galaxies form."],"Hot to cool."]
+],
+build:[
+["Explain how redshift supports the Big Bang theory.",["Light from distant galaxies is shifted to longer wavelengths.","This shows the galaxies are moving away from us.","More distant galaxies have bigger redshifts, so move faster.","Running this backwards suggests everything started from a single point."],["Redshift shows galaxies are getting cooler.","Redshift means galaxies move towards us."],"Expansion from a start."],
+["Explain how the temperature of a star can be found from its spectrum.",["Hot objects emit radiation over a range of wavelengths.","The peak wavelength depends on the temperature.","Hotter objects have a shorter peak wavelength.","So measuring the peak gives the temperature."],["Hotter stars peak at longer wavelengths.","The temperature is found from the star's size."],"Peak wavelength."],
+["Explain why the pitch of a siren drops as it passes you.",["As the siren approaches, the waves are squashed together.","So the frequency heard is higher than emitted.","As it moves away, the waves are spread out.","So the frequency heard is lower: the pitch drops."],["The siren changes its own frequency.","Sound speeds up as the siren approaches."],"Doppler effect."]
+],
+spot:[
+["Find the speed of a galaxy with z = 0.02.",["z = v/c","v = zc","v = 0.02 × 3 × 10⁸","v = 6 × 10⁸ m/s"],3,"0.02 × 3 × 10⁸ = 6 × 10⁶ m/s."],
+["Describe the Doppler effect for a source moving away.",["The waves are stretched.","The observed wavelength is longer.","The observed frequency is higher.","For light, this is redshift."],2,"The observed frequency is lower."],
+["Describe dark matter.",["It cannot be seen directly.","Its gravity affects the motion of stars.","It explains the accelerating expansion.","Its nature is not yet known."],2,"Accelerating expansion is explained by dark energy."]
+],
+write:[
+["State what is meant by redshift.",[["(longer|increase).{0,20}wavelength|wavelength.{0,30}(longer|increase)","Wavelength is increased"],["(moving away|reced)","Because the source is moving away"]],2,"Redshift is the increase in wavelength of light from a source that is moving away from the observer."],
+["Give two pieces of evidence for the Big Bang.",[["(redshift|moving away|expan|Hubble)","Galaxies receding (redshift)"],["(cosmic microwave|CMB|background radiation)","The cosmic microwave background"],["(hydrogen|helium|abundance|light elements)","Abundance of light elements"]],2,"Any two: redshift of distant galaxies (expansion); the cosmic microwave background; the abundance of hydrogen and helium."],
+["Explain how the age of the Universe can be estimated using Hubble's constant.",[["v *= *H|Hubble.{0,20}law|proportional","v = H₀d"],["(time|t) *= *d ?\\/ ?v|d ?÷ ?v|distance.{0,20}(divided|÷).{0,10}(speed|velocity)","t = d/v"],["1 ?\\/ ?H|1 ?÷ ?H|reciprocal","So t = 1/H₀"]],2,"Hubble's law gives v = H₀d. If galaxies have moved at a steady speed since the Big Bang, the time is t = d/v = 1/H₀."]
+]
+});
+
+EX3("fc",{
+mc:[
+["What is the definition of the volt?","one joule per coulomb",[["one coulomb per second","That is the ampere."],["one joule per second","That is the watt."],["one newton per coulomb","That is a unit of field strength."]],"V = W/Q.",""],
+["A positive charge moves in the direction of an electric field. What happens to its potential energy?","It decreases.",[["It increases.","Moving with the field, the field does work on it."],["It stays the same.","Work is done by the field."],["It becomes zero.","Not necessarily."]],"Like a mass falling in a gravitational field.",""],
+["An electron moves at right angles to a uniform magnetic field. What path does it follow?","a circular arc",[["a straight line","The force changes its direction."],["a parabola","That is in an electric field."],["it stops","Magnetic forces do no work on it."]],"Force always perpendicular to velocity.","h"],
+["Why does a magnetic field not change the speed of a moving charge?","The force is always at right angles to the velocity, so no work is done.",[["The force is too small.","It can be large."],["Charges have no mass.","They do have mass."],["The field cancels.","The force is real."]],"Only direction changes.","h"],
+["An electron is accelerated through 2000 V. How much kinetic energy does it gain?","3.2 × 10⁻¹⁶ J",[["2000 J","Multiply by the charge."],["8.0 × 10⁻²³ J","Multiply, do not divide."],["3.2 × 10⁻¹⁹ J","Check: 1.6 × 10⁻¹⁹ × 2000."]],"W = QV = 1.6 × 10⁻¹⁹ × 2000 = 3.2 × 10⁻¹⁶ J.","p"],
+["An electron gains 4.0 × 10⁻¹⁷ J of kinetic energy from rest. What is its speed? (mₑ = 9.11 × 10⁻³¹ kg)","9.4 × 10⁶ m/s",[["8.8 × 10¹³ m/s","Take the square root."],["4.4 × 10¹³ m/s","Use v = √(2E/m)."],["6.6 × 10⁶ m/s","Do not forget the 2."]],"v = √(2 × 4.0 × 10⁻¹⁷ ÷ 9.11 × 10⁻³¹) = 9.4 × 10⁶ m/s.","p"],
+["A proton is accelerated through 500 V. How much work is done on it?","8.0 × 10⁻¹⁷ J",[["500 J","Multiply by the charge."],["3.2 × 10⁻²² J","Multiply, do not divide."],["8.0 × 10⁻¹⁹ J","Check the powers of ten."]],"W = QV = 1.6 × 10⁻¹⁹ × 500 = 8.0 × 10⁻¹⁷ J.","p"]
+],
+gap:[
+["Electric field lines point from [positive] to [negative] charges.",["north","south"],"The direction a positive charge would move."],
+["The potential difference between two points is the [work] done in moving one [coulomb] of charge between them.",["power","ampere"],"V = W/Q."],
+["A moving charge in a magnetic field experiences a [force] only if it moves [across] the field lines.",["voltage","along"],"No force moving parallel to the field."]
+],
+sort:[
+["Sort these electric field patterns.",{"Uniform":["between two parallel plates"],"Radial":["around a single point charge"],"Curved between charges":["between a positive and a negative point charge"]},"Know the shapes."],
+["Sort these: deflected or not?",{"Deflected by an electric field":["electron","proton","alpha particle"],"Not deflected":["neutron","gamma ray"]},"Only charged particles."],
+["Sort these accelerators by their use.",{"Linear accelerator":["accelerates particles in a straight line using alternating fields"],"Cyclotron":["uses a magnetic field to bend particles into spirals"],"Synchrotron":["uses increasing magnetic field to keep particles in a fixed ring"]},"Three accelerator types."]
+],
+order:[
+["Put the steps in order to find the speed of an electron accelerated from rest.",["Calculate the work done, W = QV.","This equals the kinetic energy gained.","Write ½mv² = QV.","Rearrange for v."],"Energy method."],
+["Put these in order of kinetic energy gained when accelerated through 1000 V, smallest first.",["neutron","electron","alpha particle"],"W = QV: neutron 0, electron e, alpha 2e."],
+["Put the steps in order for how a cyclotron works.",["Particles are released near the centre.","They are accelerated across the gap between the dees.","The magnetic field bends them in a semicircle.","They return to the gap and are accelerated again, spiralling outwards."],"Accelerate, bend, repeat."]
+],
+build:[
+["Explain why an electron and a proton accelerated through the same p.d. gain the same kinetic energy.",["The work done on a charge is W = QV.","Both have the same size of charge, 1.6 × 10⁻¹⁹ C.","They are accelerated through the same V.","So they gain the same energy, but the electron moves much faster as it has less mass."],["The proton gains more energy as it is heavier.","The electron gains no energy as it is negative."],"Same Q, same V."],
+["Explain the path of an electron entering a uniform electric field between plates at right angles to the field.",["The electron's horizontal velocity is unchanged.","It feels a constant force towards the positive plate.","So it accelerates uniformly towards the positive plate.","Its path is a parabola, like a projectile."],["It moves in a circle.","It accelerates towards the negative plate."],"Like a projectile."],
+["Explain why particle accelerators use magnetic fields.",["Magnetic fields exert a force on moving charges.","The force is at right angles to the motion.","This bends the particles' paths.","So they can be kept in a circular ring."],["Magnetic fields speed up the particles.","Magnetic fields make the particles heavier."],"Bending, not accelerating."]
+],
+spot:[
+["Find the work done moving 2 C through 12 V.",["W = QV","W = 2 × 12","W = 24 J","W = 6 J"],3,"24 J is correct; 6 J would be 12 ÷ 2."],
+["Describe the field between two parallel plates.",["The field lines are parallel.","They are equally spaced.","They point from negative to positive.","The field is uniform."],2,"They point from positive to negative."],
+["Find the speed of an electron with 1.6 × 10⁻¹⁶ J of kinetic energy.",["Eₖ = ½mv²","v² = 2Eₖ ÷ m","v² = 2 × 1.6 × 10⁻¹⁶ ÷ 9.11 × 10⁻³¹ = 3.5 × 10¹⁴","v = 3.5 × 10¹⁴ m/s"],3,"Take the square root: v = 1.9 × 10⁷ m/s."]
+],
+write:[
+["State what is meant by an electric field.",[["(region|space|area)","A region"],["charge.{0,30}(force|experiences)|force.{0,30}charge","Where a charge experiences a force"]],2,"An electric field is a region in which a charge experiences a force."],
+["Define the volt.",[["(one|1) ?(joule|J)","One joule"],["(per|each|for).{0,10}(one|1|a)? ?(coulomb|C)","Per coulomb"]],2,"One volt is one joule per coulomb: the p.d. when one joule of work is done moving one coulomb of charge."],
+["Explain why a magnetic field can change the direction but not the speed of a charged particle.",[["(right angles|perpendicular|90)","Force is perpendicular to velocity"],["no work|work.{0,20}(zero|not done)","No work is done"],["(kinetic energy|speed).{0,30}(constant|unchanged|same)","Kinetic energy and speed are unchanged"]],2,"The magnetic force is always at right angles to the velocity, so it does no work on the particle. Its kinetic energy, and so its speed, stays the same; only its direction changes."]
+]
+});
+
+EX3("fe",{mc:[
+["A box is pushed along a rough floor at constant speed. What is true about the forces?","The push equals the friction.",[["The push is bigger than the friction.","That would cause acceleration."],["There is no friction.","The floor is rough."],["The push is zero.","A push is needed to balance friction."]],"Constant velocity: balanced forces.",""]
+]});
+
+EX3("sm",{
+mc:[
+["Which of these is a lepton?","electron",[["proton","A proton is a baryon."],["neutron","A neutron is a baryon."],["pion","A pion is a meson."]],"Leptons: electron, muon, tau and their neutrinos.",""],
+["A particle is made of an up, an up and a down quark. What is it?","a proton",[["a neutron","That is udd."],["a pion","Mesons are quark-antiquark pairs."],["an electron","Electrons are not made of quarks."]],"uud: charge +⅔ + ⅔ − ⅓ = +1.","h"],
+["Which force carrier is responsible for beta decay?","W and Z bosons",[["photon","Photons carry the electromagnetic force."],["gluon","Gluons carry the strong force."],["graviton","Not involved in beta decay."]],"Beta decay is a weak interaction.","h"],
+["What is the charge of a down quark?","−⅓e",[["+⅔e","That is an up quark."],["−e","That is an electron."],["0","Quarks are charged."]],"d = −⅓.","p"],
+["What is the charge of a meson made of an up quark and an anti-down quark?","+1e",[["0","Anti-down has charge +⅓."],["+⅓e","Add +⅔ and +⅓."],["−1e","Check the signs."]],"+⅔ + ⅓ = +1.","p"],
+["What is the charge of a particle made of up, down and strange quarks?","0",[["+1e","s has charge −⅓."],["−1e","Check: +⅔ − ⅓ − ⅓."],["+⅓e","Add all three."]],"+⅔ − ⅓ − ⅓ = 0.","p"],
+["What is the charge of an antiproton?","−1e",[["+1e","Antiparticles have opposite charge."],["0","It is charged."],["−⅔e","That is one anti-up quark; add all three: ūūd̄."]],"Opposite to the proton.","p"]
+],
+gap:[
+["Hadrons are made of [quarks]. Baryons have three, and mesons have a quark and an [antiquark].",["leptons","electron"],"Hadron family."],
+["Every particle has an [antiparticle] with the same mass but opposite [charge].",["isotope","mass"],"e.g. electron and positron."]
+],
+sort:[
+["Sort these particles.",{"Baryon":["proton","neutron"],"Meson":["pion","kaon"],"Lepton":["electron","neutrino"]},"Three quarks, quark-antiquark, or fundamental."],
+["Sort these force carriers.",{"Strong force":["gluon"],"Electromagnetic force":["photon"],"Weak force":["W boson","Z boson"]},"Bosons carry forces."],
+["Sort these: fundamental or not?",{"Fundamental":["electron","up quark","photon","neutrino"],"Made of smaller particles":["proton","neutron","pion"]},"Quarks and leptons are fundamental."]
+],
+order:[
+["Put these forces in order of strength at nuclear distances, weakest first.",["gravity","weak","electromagnetic","strong"],"Gravity is by far the weakest."],
+["Put these in order of size, largest first.",["atom","nucleus","proton","quark"],"Each contains the next."],
+["Put the steps in order to find the charge of a hadron.",["Write down the quarks it contains.","Look up each quark's charge.","Change the sign for any antiquark.","Add the charges."],"Sum the quark charges."]
+],
+build:[
+["Explain the evidence for the neutrino from beta decay.",["In beta decay, electrons are emitted with a range of energies.","If only the electron were emitted, all would have the same energy.","So another particle must carry away some of the energy.","This particle is the neutrino (antineutrino)."],["Neutrinos were photographed in cloud chambers.","Electrons in beta decay all have the same energy."],"Missing energy."],
+["Explain why a proton has a charge of +1e.",["A proton is made of two up quarks and one down quark.","Each up quark has charge +⅔e.","The down quark has charge −⅓e.","+⅔ + ⅔ − ⅓ = +1."],["A proton is a fundamental particle with charge +1.","A proton contains a positron."],"Quark sum."],
+["Explain the difference between a hadron and a lepton.",["Hadrons are made of quarks.","They feel the strong force.","Leptons are fundamental particles.","Leptons do not feel the strong force."],["Leptons are heavier than all hadrons.","Hadrons are fundamental."],"Composition and forces."]
+],
+spot:[
+["Describe a neutron.",["A neutron is a baryon.","It is made of udd quarks.","Its charge is +⅔ − ⅓ − ⅓ = 0.","It is a lepton."],3,"A neutron is a hadron (baryon), not a lepton."],
+["Describe the forces and their carriers.",["Gluons carry the strong force.","Photons carry the electromagnetic force.","W and Z bosons carry the weak force.","Gravitons carry the strong force."],3,"Gravitons are proposed carriers of gravity."],
+["Describe a positron.",["It is the antiparticle of the electron.","It has the same mass as an electron.","It has a charge of −1e.","It is a lepton."],2,"A positron has a charge of +1e."]
+],
+write:[
+["State what is meant by an antiparticle.",[["(same|equal) mass","Same mass"],["opposite (charge|sign)","Opposite charge"]],2,"An antiparticle has the same mass as its particle but opposite charge."],
+["Name the force carrier for each of the strong and electromagnetic forces.",[["gluon","Strong: gluon"],["photon","Electromagnetic: photon"]],2,"The strong force is carried by gluons. The electromagnetic force is carried by photons."],
+["Explain why the neutrino was proposed.",[["beta","In beta decay"],["(range|spread|different|variety).{0,30}(energ)|energ.{0,30}(range|vary|different)","Electrons have a range of energies"],["(conserv|missing|carry away)","To conserve energy"]],2,"In beta decay, electrons are emitted with a range of energies. To conserve energy, another particle (the neutrino) must carry away the missing energy."]
+]
+});
+
+EX3("nr",{
+mc:[
+["What is nuclear fission?","a large nucleus splitting into smaller nuclei, releasing energy",[["two small nuclei joining","That is fusion."],["an electron leaving an atom","That is ionisation."],["a nucleus emitting a photon","That is gamma emission."]],"Fission splits heavy nuclei.",""],
+["Where does the energy released in a nuclear reaction come from?","a decrease in mass, E = mc²",[["the kinetic energy of electrons","It is nuclear, not electronic."],["chemical bonds","Nuclear, not chemical."],["the neutrons' charge","Neutrons are uncharged."]],"Mass defect becomes energy.",""],
+["Why is a very high temperature needed for fusion?","Nuclei must move fast enough to overcome their electrostatic repulsion.",[["To melt the fuel.","The fuel is already a gas or plasma."],["To make neutrons.","Not the reason."],["To slow the nuclei down.","They need to be fast."]],"Both nuclei are positive.","h"],
+["In a fission reaction, the total mass of the products is compared with the reactants. What is found?","The products have slightly less mass.",[["The products have more mass.","Energy is released, so mass is lost."],["The masses are exactly equal.","A small mass is converted to energy."],["The products have no mass.","They have nearly the same mass."]],"Mass defect.","h"],
+["What is the role of the neutron in a chain reaction?","Neutrons released by one fission go on to cause further fissions.",[["Neutrons absorb all the energy.","They trigger more fissions."],["Neutrons stop the reaction.","Control rods absorb some neutrons."],["Neutrons join to make helium.","That is not fission."]],"Self-sustaining reaction.","h"],
+["A reaction has a mass defect of 3.0 × 10⁻²⁸ kg. How much energy is released?","2.7 × 10⁻¹¹ J",[["9.0 × 10⁻²⁰ J","Use c², not c."],["3.3 × 10⁻⁴⁵ J","Multiply, do not divide."],["2.7 × 10⁻¹⁰ J","Check: 3.0 × 10⁻²⁸ × 9 × 10¹⁶."]],"E = mc² = 3.0 × 10⁻²⁸ × 9 × 10¹⁶ = 2.7 × 10⁻¹¹ J.","p"],
+["A reaction releases 4.5 × 10⁻¹² J. What is the mass defect?","5.0 × 10⁻²⁹ kg",[["1.5 × 10⁻²⁰ kg","Divide by c²."],["4.1 × 10⁵ kg","Divide, do not multiply."],["5.0 × 10⁻²⁸ kg","Check the powers of ten."]],"m = E/c² = 4.5 × 10⁻¹² ÷ 9 × 10¹⁶ = 5.0 × 10⁻²⁹ kg.","p"]
+],
+gap:[
+["In nuclear equations, the [mass] numbers and the [atomic] numbers must balance on both sides.",["energy","charge-free"],"Conservation rules."],
+["Nuclear [fusion] joins light nuclei. It happens in the core of [stars].",["fission","planets"],"Powers the Sun."]
+],
+sort:[
+["Sort these into fission or fusion.",{"Fission":["uranium-235 splitting after absorbing a neutron","used in nuclear power stations"],"Fusion":["hydrogen nuclei joining to make helium","happens in the Sun"]},"Split or join."],
+["Sort these radioactive decays by their effect on the nucleus.",{"Mass number falls by 4":["alpha decay"],"Atomic number rises by 1":["beta decay"],"No change in A or Z":["gamma emission"]},"Balancing equations."],
+["Sort these: challenges for fusion power.",{"Challenge":["containing plasma at over 100 million kelvin","producing more energy out than in","materials damaged by neutrons"],"Advantage":["abundant fuel from seawater","no long-lived high-level waste"]},"Fusion is hard but appealing."]
+],
+order:[
+["Put the steps of a fission chain reaction in order.",["A neutron is absorbed by a uranium-235 nucleus.","The nucleus becomes unstable and splits.","Two daughter nuclei and two or three neutrons are released.","These neutrons cause further fissions."],"Self-sustaining."],
+["Put the steps in order to find energy released from a nuclear equation.",["Add the masses of the reactants.","Add the masses of the products.","Subtract to find the mass defect.","Use E = mc²."],"Mass defect method."],
+["Put these in order of energy released per kilogram of fuel, smallest first.",["burning coal","fission of uranium-235","fusion of hydrogen into helium"],"Nuclear reactions release millions of times more energy per kg than burning; fusion releases the most per kg."]
+],
+build:[
+["Explain why fusion is difficult to achieve on Earth.",["Fusing nuclei are both positively charged.","They repel strongly as they get close.","Very high temperatures are needed so they move fast enough.","Such hot plasma cannot touch any container, so magnetic fields are used."],["Fusion needs very heavy nuclei.","Fusion happens easily at room temperature."],"Overcome repulsion, contain plasma."],
+["Explain where the energy of a fission reaction comes from.",["The total mass after the reaction is less than before.","This loss of mass is the mass defect.","The mass is converted into energy by E = mc².","Most appears as kinetic energy of the products."],["Energy comes from breaking chemical bonds.","Energy comes from the neutron's charge."],"E = mc²."],
+["Explain how a nuclear reactor controls its chain reaction.",["Each fission releases neutrons that can cause more fissions.","Control rods absorb some of these neutrons.","Lowering the rods absorbs more neutrons and slows the reaction.","This keeps the rate steady, with about one neutron causing a further fission."],["Control rods speed up the neutrons.","The reaction is controlled by changing the fuel's temperature."],"Absorb neutrons."]
+],
+spot:[
+["Find the energy from a mass defect of 2 × 10⁻²⁸ kg.",["E = mc²","E = 2 × 10⁻²⁸ × 3 × 10⁸","E = 6 × 10⁻²⁰ J","Energy is released."],1,"c must be squared: E = 2 × 10⁻²⁸ × 9 × 10¹⁶ = 1.8 × 10⁻¹¹ J."],
+["Balance an alpha decay of uranium-238.",["Alpha is ⁴₂He.","Mass number falls by 4 to 234.","Atomic number falls by 4 to 88.","The daughter is thorium-234."],2,"Atomic number falls by 2, from 92 to 90."],
+["Describe fusion in the Sun.",["Hydrogen nuclei fuse to make helium.","The mass of the products is less than the reactants.","Energy is absorbed in the process.","The core temperature is millions of kelvin."],2,"Energy is released."]
+],
+write:[
+["State what is meant by the mass defect.",[["(difference|loss|decrease|less).{0,30}mass|mass.{0,30}(lost|less|difference|decrease)","The loss of mass"],["(before|reactants).{0,30}(after|products)|(products|after)","Between reactants and products"]],2,"The mass defect is the difference between the total mass of the reactants and the total mass of the products. It is converted to energy."],
+["Explain what is meant by a chain reaction.",[["neutron","Neutrons are released"],["(further|more|other) fission|cause.{0,30}fission","These cause further fissions"],["(sustain|continu|repeat)","So the reaction continues"]],2,"Each fission releases neutrons. These neutrons are absorbed by other nuclei and cause further fissions, so the reaction keeps going."],
+["Give one advantage and one disadvantage of nuclear fission for generating electricity.",[["(no|low).{0,20}(CO2|carbon|greenhouse)|reliable|(lots|large|much).{0,20}energy|small.{0,20}fuel","An advantage"],["(waste|radioactive|accident|meltdown|decommission|cost)","A disadvantage"]],2,"Advantage: no CO₂ emissions and lots of energy from a small mass of fuel. Disadvantage: long-lived radioactive waste and risk of accidents."]
+]
+});
+
+EX3("is",{
+mc:[
+["What is irradiance?","the power per unit area incident on a surface",[["the total energy from a source","Irradiance is per area."],["the brightness of a colour","It is a physical quantity."],["the wavelength of light","Not related."]],"I = P/A.",""],
+["What is the unit of irradiance?","W m⁻²",[["W","That is power."],["J","That is energy."],["lux","Not used in Higher Physics."]],"Watts per square metre.",""],
+["Which source approximately follows the inverse square law?","a small lamp far from the detector",[["a laser","A laser beam hardly spreads."],["a long fluorescent tube close up","Not a point source."],["a flat panel close up","Not a point source."]],"Point sources follow I ∝ 1/d².",""],
+["Which graph gives a straight line for an inverse square law source?","I against 1/d²",[["I against d","That is a curve."],["I against 1/d","Still a curve."],["I against d²","That is a curve."]],"I ∝ 1/d².",""],
+["A detector is moved from 1 m to 3 m from a point source. What happens to the irradiance?","It falls to one ninth.",[["It falls to one third.","Inverse square, not inverse."],["It triples.","It decreases."],["It falls to one sixth.","3² = 9."]],"I ∝ 1/d².","h"],
+["Why does irradiance fall with distance from a point source?","The same power spreads over a larger area.",[["The light loses energy as it travels.","Not in a vacuum."],["The light slows down.","Speed is constant."],["The wavelength increases.","Not with distance."]],"Area of a sphere ∝ d².","h"],
+["A 60 W lamp's light falls on an area of 0.5 m². What is the irradiance?","120 W m⁻²",[["30 W m⁻²","Divide P by A."],["0.0083 W m⁻²","That is A ÷ P."],["60 W m⁻²","Divide by area."]],"I = 60 ÷ 0.5 = 120 W m⁻².","p"],
+["Irradiance is 20 W m⁻² at 2 m. What is it at 4 m?","5 W m⁻²",[["10 W m⁻²","Inverse square."],["80 W m⁻²","It decreases."],["40 W m⁻²","It decreases."]],"I₁d₁² = I₂d₂²: 20 × 4 = I₂ × 16.","p"]
+],
+gap:[
+["Irradiance is inversely proportional to the [square] of the [distance] from a point source.",["cube","mass"],"I ∝ 1/d²."],
+["To test the inverse square law, plot I against [1/d²]. A straight line through the [origin] confirms it.",["d","intercept"],"Linearise the graph."],
+["I₁d₁² = [I₂d₂²] for a point source.",["I₂d₂","I₂/d₂²"],"The product stays constant."]
+],
+sort:[
+["Sort these changes in distance from a point source by the effect on irradiance.",{"Becomes 4 times bigger":["distance halved"],"Becomes a quarter":["distance doubled"],"Becomes a ninth":["distance tripled"]},"Square the factor."],
+["Sort these: point source or not?",{"Behaves as a point source":["a small bulb far from the detector","a distant star"],"Not a point source":["a laser","a long strip light close up"]},"Light must spread equally in all directions."],
+["Sort these experimental steps for the inverse square law.",{"Measure":["distance from source to detector","irradiance at each distance"],"Control":["power of the lamp","background light (darkened room)"]},"Fair test."]
+],
+order:[
+["Put the steps in order to verify the inverse square law.",["Darken the room and set up the lamp and light meter.","Measure the irradiance at several distances.","Calculate 1/d² for each distance.","Plot I against 1/d² and look for a straight line through the origin."],"Linearise."],
+["Put these distances in order of irradiance, highest first.",["0.5 m","1 m","2 m","4 m"],"Closer is brighter."],
+["Put the steps in order to find the irradiance at a new distance.",["Write I₁d₁² = I₂d₂².","Substitute the known values.","Rearrange for I₂.","Calculate and include the unit."],"Use the constant product."]
+],
+build:[
+["Explain why irradiance from a point source follows an inverse square law.",["Light spreads out equally in all directions.","At distance d, the power spreads over a sphere of area 4πd².","Irradiance = power ÷ area.","So irradiance is proportional to 1/d²."],["Light gets weaker because it slows down.","The light loses energy to the air."],"Spreading over a sphere."],
+["Explain why a laser does not follow the inverse square law.",["A laser produces a narrow, parallel beam.","The beam hardly spreads out.","The area it covers stays almost the same.","So the irradiance stays nearly constant with distance."],["A laser is too bright to measure.","Lasers emit radio waves."],"No spreading."],
+["Explain why the room should be darkened in an inverse square law experiment.",["Background light adds to the reading.","This would make the irradiance too high.","The extra is the same at all distances, so it distorts the pattern.","Darkening the room removes this error."],["The lamp works better in the dark.","Darkness changes the lamp's power."],"Remove background."]
+],
+spot:[
+["Irradiance is 100 W m⁻² at 1 m. Find it at 5 m.",["I₁d₁² = I₂d₂²","100 × 1 = I₂ × 5","I₂ = 20 W m⁻²","It is smaller, as expected."],1,"d₂ must be squared: 100 × 1 = I₂ × 25, so I₂ = 4 W m⁻²."],
+["Describe irradiance.",["It is power per unit area.","Its unit is W m⁻².","It depends on the colour of the source only.","For a point source it falls with distance."],2,"It depends on the power and the area; not just the colour."],
+["Describe the inverse square law graph.",["Plot I on the y-axis.","Plot 1/d on the x-axis.","A straight line through the origin confirms the law.","The gradient is constant."],1,"Plot 1/d² on the x-axis."]
+],
+write:[
+["State what is meant by irradiance.",[["power","Power"],["(per|each|unit).{0,10}area|area","Per unit area"]],2,"Irradiance is the power per unit area incident on a surface."],
+["Describe how to show that light from a small lamp follows the inverse square law.",[["(light meter|detector|photodiode|sensor)","Use a light meter"],["(distance|ruler|metre stick)","Measure the distance"],["1 ?\\/ ?d ?²|1/d²|one over d squared","Plot I against 1/d²"],["(dark|background)","Darken the room"]],3,"In a darkened room, measure the irradiance with a light meter at several distances from the lamp. Plot I against 1/d². A straight line through the origin shows the inverse square law."],
+["Explain why the irradiance from the Sun is much lower on Mars than on Earth.",[["(further|farther|more distant|greater distance)","Mars is further from the Sun"],["(inverse square|1 ?\\/ ?d ?²|spread.{0,20}area)","Irradiance falls with distance squared"]],2,"Mars is further from the Sun. The Sun's power spreads over a bigger area, so irradiance falls as 1/d²."]
+]
+});
+
+EX3("wp",{
+mc:[
+["What is the photoelectric effect?","the emission of electrons from a metal surface when light of high enough frequency shines on it",[["light bending round a gap","That is diffraction."],["electrons emitting light","That is the reverse."],["metals glowing when hot","That is thermal emission of light."]],"Evidence for photons.",""],
+["What is the threshold frequency?","the minimum frequency of light that can eject electrons from a metal",[["the maximum frequency of light","There is no maximum."],["the frequency at which light is brightest","Brightness is irradiance."],["the frequency of the emitted electrons","Electrons are not waves here."]],"Below f₀ nothing is emitted.",""],
+["What is the work function?","the minimum energy needed to free an electron from a metal surface",[["the energy of a photon","Photon energy is hf."],["the kinetic energy of the electron","That is hf − hf₀."],["the energy of the metal","Not a definition."]],"hf₀ = work function.",""],
+["What is the energy of a photon equal to?","Planck's constant × frequency",[["Planck's constant × wavelength","E = hf, not hλ."],["mass × c²","That is mass-energy."],["½mv²","That is kinetic energy."]],"E = hf.",""],
+["Light below the threshold frequency shines brightly on a metal. What happens?","No electrons are emitted.",[["Many electrons are emitted.","Each photon has too little energy."],["Electrons are emitted slowly.","None are emitted."],["The metal becomes positive.","No electrons leave."]],"Brightness cannot make up for low frequency.","h"],
+["What is the energy of a photon of frequency 6.0 × 10¹⁴ Hz? (h = 6.63 × 10⁻³⁴ J s)","4.0 × 10⁻¹⁹ J",[["1.1 × 10⁻⁴⁸ J","Multiply, do not divide."],["9.0 × 10⁴⁷ J","That is f ÷ h."],["4.0 × 10⁻²⁰ J","Check the powers of ten."]],"E = hf = 6.63 × 10⁻³⁴ × 6.0 × 10¹⁴ = 4.0 × 10⁻¹⁹ J.","p"],
+["Photons of energy 5.0 × 10⁻¹⁹ J hit a metal with work function 3.2 × 10⁻¹⁹ J. What is the maximum kinetic energy of the electrons?","1.8 × 10⁻¹⁹ J",[["8.2 × 10⁻¹⁹ J","Subtract, do not add."],["5.0 × 10⁻¹⁹ J","Some energy frees the electron."],["1.6 × 10⁻¹⁹ J","Check the subtraction."]],"Eₖ = hf − hf₀ = 1.8 × 10⁻¹⁹ J.","p"]
+],
+gap:[
+["Light behaves as a [wave] in interference and as a stream of [photons] in the photoelectric effect.",["particle","electrons"],"Wave-particle duality."],
+["The maximum kinetic energy of an emitted electron is Eₖ = hf − [hf₀]. Increasing the [irradiance] increases the number of electrons but not their maximum energy.",["hλ","wavelength"],"One photon frees one electron."]
+],
+sort:[
+["Sort these: evidence for waves or particles?",{"Wave behaviour":["interference","diffraction"],"Particle behaviour":["photoelectric effect","threshold frequency"]},"Duality."],
+["Sort these changes to a photoelectric experiment (above threshold).",{"More electrons per second":["increase the irradiance"],"Faster electrons":["increase the frequency"],"No electrons":["use light below the threshold frequency"]},"Number and energy are separate."],
+["Sort these quantities with their symbols.",{"Planck's constant":["h"],"Threshold frequency":["f₀"],"Work function":["hf₀"],"Photon energy":["hf"]},"Know the symbols."]
+],
+order:[
+["Put these EM radiations in order of photon energy, lowest first.",["radio","infrared","ultraviolet","X-rays"],"E = hf."],
+["Put the steps in order to find the maximum speed of a photoelectron.",["Calculate the photon energy, hf.","Subtract the work function.","This gives the maximum Eₖ.","Use Eₖ = ½mv² to find v."],"Energy, subtract, speed."],
+["Put the stages of the photoelectric effect in order.",["A photon hits the metal surface.","It gives all its energy to one electron.","Some energy frees the electron (work function).","The rest becomes the electron's kinetic energy."],"One photon, one electron."]
+],
+build:[
+["Explain why increasing the brightness of red light may not release electrons when ultraviolet does.",["Each photon gives its energy to a single electron.","Red light photons have a low frequency, so low energy.","If this is below the work function, no electron is freed.","More red photons still cannot free an electron; UV photons have enough energy each."],["Brighter red light has a higher frequency.","Electrons can store energy from several photons."],"Photon energy matters."],
+["Explain why the photoelectric effect supports the particle model of light.",["A wave model predicts that bright enough light of any frequency would free electrons.","In fact there is a threshold frequency.","This is explained if light arrives in packets of energy hf.","Each packet must have enough energy to free one electron."],["The wave model predicts a threshold frequency.","Light only behaves as a wave."],"Quantised energy."],
+["Explain why increasing the irradiance above the threshold increases the current in a photocell.",["Higher irradiance means more photons per second.","Each photon can release one electron.","So more electrons are released per second.","The current increases, but the maximum Eₖ stays the same."],["Each photon has more energy at higher irradiance.","Electrons move faster at higher irradiance."],"Number of photons."]
+],
+spot:[
+["Find the photon energy for 5 × 10¹⁴ Hz light.",["E = hf","E = 6.63 × 10⁻³⁴ × 5 × 10¹⁴","E = 3.3 × 10⁻¹⁹ J","E = 3.3 × 10⁻¹⁹ eV"],3,"The unit is J."],
+["Describe the photoelectric effect.",["Light hits a metal surface.","Electrons can be emitted.","Brighter light gives faster electrons.","There is a threshold frequency."],2,"Higher frequency gives faster electrons; brightness gives more electrons."],
+["Find Eₖ for photons of 4 × 10⁻¹⁹ J on a metal with work function 5 × 10⁻¹⁹ J.",["Eₖ = hf − hf₀","Eₖ = 4 × 10⁻¹⁹ − 5 × 10⁻¹⁹","Eₖ = −1 × 10⁻¹⁹ J","So electrons are emitted slowly."],3,"A negative result means no electrons are emitted."]
+],
+write:[
+["State what is meant by the work function of a metal.",[["(minimum|least|smallest) energy","Minimum energy"],["(free|release|remove|eject).{0,20}electron","To free an electron"],["surface","From the surface"]],2,"The work function is the minimum energy needed to release an electron from the surface of the metal."],
+["Explain why there is a threshold frequency in the photoelectric effect.",[["(one|single|each) photon.{0,40}(one|single|an) electron|photon.{0,30}electron","One photon interacts with one electron"],["E *= *hf|energy.{0,30}frequency","Photon energy depends on frequency"],["(work function|minimum energy)","It must be at least the work function"]],2,"Each photon gives its energy to one electron. Photon energy is E = hf, so below a certain frequency the photon energy is less than the work function and no electrons are freed."],
+["Describe what is meant by wave-particle duality for light.",[["wave","Light behaves as a wave"],["(particle|photon)","And as particles"],["(interference|diffraction|photoelectric)","An example of each"]],2,"Light shows wave behaviour, such as interference and diffraction, and particle behaviour, such as the photoelectric effect."]
+]
+});
+
+EX3("in",{
+mc:[
+["What is coherence?","Two waves have a constant phase relationship.",[["Two waves have the same amplitude.","Amplitude is not the definition."],["Two waves travel at different speeds.","Coherence is about phase."],["Two waves cancel completely.","That is destructive interference."]],"Coherent waves usually have the same frequency.",""],
+["What is the path difference for constructive interference?","a whole number of wavelengths, mλ",[["(m + ½)λ","That is destructive."],["zero only","Any whole number works."],["λ/4","Not a condition."]],"Waves arrive in phase.",""],
+["What does a diffraction grating do to white light?","splits it into spectra, with violet deviated least",[["splits it with red deviated least","Red has the longest λ, so deviates most."],["makes it a single colour","It separates colours."],["absorbs it","It transmits it."]],"d sin θ = mλ.",""],
+["The two slits in an interference experiment are moved closer together. What happens to the fringes?","They spread further apart.",[["They move closer together.","Smaller slit separation, wider pattern."],["They disappear.","They still appear."],["They become brighter only.","The spacing changes."]],"Fringe spacing ∝ 1/d.","h"],
+["Red light is replaced by blue light on a grating. What happens to the maxima?","They move closer to the central maximum.",[["They move further out.","Blue has a shorter λ."],["They stay the same.","λ changes."],["They vanish.","They still form."]],"sin θ = mλ/d.","h"],
+["A grating has 300 lines per mm. Light of 600 nm is used. What is sin θ for the first order?","0.18",[["1.8","Check d = 3.3 × 10⁻⁶ m."],["0.018","Check the powers of ten."],["0.36","That is the second order."]],"d = 1/300 000 = 3.33 × 10⁻⁶ m; sin θ = 600 × 10⁻⁹ ÷ 3.33 × 10⁻⁶ = 0.18.","p"],
+["Two coherent sources are 10 cm and 13 cm from a point. λ = 2 cm. What is observed?","a minimum (destructive interference)",[["a maximum","Path difference 3 cm = 1.5λ."],["nothing, sources not coherent","They are coherent."],["second-order maximum","That needs 4 cm."]],"3 cm ÷ 2 cm = 1.5λ: destructive.","p"]
+],
+gap:[
+["Interference is evidence that light is a [wave]. Particles cannot [cancel] each other out.",["particle","add"],"Wave property."],
+["For destructive interference, the path difference is (m + [½])λ. The waves arrive out of [phase].",["¼","step"],"Crest meets trough."]
+],
+sort:[
+["Sort these by the type of interference.",{"Constructive":["path difference 0","path difference λ","path difference 2λ"],"Destructive":["path difference ½λ","path difference 1.5λ"]},"Whole or half wavelengths."],
+["Sort these changes to a grating experiment.",{"Maxima further apart":["use longer wavelength light","use a grating with more lines per mm"],"Maxima closer together":["use shorter wavelength light","use a grating with fewer lines per mm"]},"sin θ = mλ/d."],
+["Sort these: coherent sources or not?",{"Coherent":["two slits lit by the same laser","two speakers driven by one signal generator"],"Not coherent":["two separate light bulbs","two different radios"]},"Constant phase relationship."]
+],
+order:[
+["Put these colours in order of deviation by a grating (first order), least first.",["violet","blue","green","red"],"Longer λ, more deviation."],
+["Put the steps in order to find λ with a grating.",["Find d from the lines per mm.","Measure the angle to the first-order maximum.","Use d sin θ = mλ with m = 1.","Calculate λ."],"Grating equation."],
+["Put the steps in order to decide the type of interference at a point.",["Measure the distance from each source to the point.","Find the path difference.","Divide by the wavelength.","Whole number: maximum. Half number: minimum."],"Path difference method."]
+],
+build:[
+["Explain how two speakers create loud and quiet points.",["Both speakers emit coherent sound waves.","At some points, waves arrive in phase (path difference mλ).","They interfere constructively, giving loud sound.","Where they arrive out of phase, they interfere destructively, giving quiet sound."],["The speakers take turns to play.","Quiet points are where sound is absorbed."],"Interference."],
+["Explain why a grating gives sharper maxima than two slits.",["A grating has many slits.","Light from all the slits must be in phase for a maximum.","Even a tiny change in angle puts many slits out of phase.","So the maxima are very narrow and bright."],["Gratings use brighter light.","Gratings have fewer slits."],"Many sources."],
+["Explain how a grating separates white light into colours.",["White light contains a range of wavelengths.","Each wavelength has maxima at a different angle, sin θ = mλ/d.","Longer wavelengths are deviated more.","So the colours spread into a spectrum."],["The grating adds colour to the light.","All colours meet at the same angle."],"λ-dependent angle."]
+],
+spot:[
+["Find λ when d = 2 × 10⁻⁶ m and θ = 15° for the first order.",["d sin θ = mλ","λ = 2 × 10⁻⁶ × sin 15° ÷ 1","λ = 5.2 × 10⁻⁷ m","This is in the infrared."],3,"5.2 × 10⁻⁷ m (520 nm) is green visible light."],
+["Describe the pattern from a grating.",["There is a bright central maximum.","Maxima appear on both sides.","Red maxima are closest to the centre.","The pattern is symmetrical."],2,"Red has the longest λ so it is furthest from the centre."],
+["Find d for a grating with 500 lines per mm.",["d = 1 ÷ lines per metre","500 lines per mm = 500 000 lines per m","d = 1 ÷ 500","d = 2 × 10⁻⁶ m"],2,"d = 1 ÷ 500 000 = 2 × 10⁻⁶ m."]
+],
+write:[
+["State what is meant by coherent sources.",[["(constant|fixed|same) phase","Constant phase relationship"],["(same) frequency","Same frequency"]],1,"Coherent sources have a constant phase relationship (and the same frequency)."],
+["State the condition for destructive interference.",[["path difference","Path difference"],["(½|half|0\\.5|\\+ ?1\\/2)","Of (m + ½)λ"],["(out of phase|crest.{0,20}trough|antiphase)","Waves arrive out of phase"]],2,"The path difference is (m + ½)λ, so the waves arrive out of phase and cancel."],
+["Explain why interference shows that light is a wave.",[["(cancel|destructive|dark)","Light waves can cancel"],["particles.{0,40}(cannot|can.t|don.t|do not)","Particles could not cancel"]],2,"In interference, light from two sources can cancel to give dark fringes. Only waves can cancel each other; particles cannot cancel, they would simply add."]
+]
+});
+
+EX3("sp",{
+mc:[
+["What is a line emission spectrum?","a series of bright lines of particular frequencies on a dark background",[["a continuous band of colours","That is a continuous spectrum."],["dark lines on a coloured band","That is absorption."],["a single colour","There are several lines."]],"From hot gases.",""],
+["What is a photon emitted when an electron does?","moves down from a higher energy level to a lower one",[["moves up to a higher level","That absorbs a photon."],["leaves the atom","That is ionisation."],["stays at the same level","No transition."]],"Energy difference becomes the photon.",""],
+["Why are there dark lines in the Sun's spectrum?","Atoms in the Sun's cooler outer layers absorb particular frequencies.",[["The Sun emits no light at those frequencies.","The light is absorbed on the way out."],["Earth's Moon blocks them.","Not the cause."],["The lines show sunspots.","They show elements."]],"Absorption spectrum.","h"],
+["An atom has levels at −5.0, −3.0 and −1.0 (× 10⁻¹⁹ J). How many different photon energies can it emit?","3",[["2","Count all pairs."],["1","There are three possible jumps."],["6","Each pair counts once."]],"3 levels give 3 transitions.","h"],
+["An electron falls from −2.4 × 10⁻¹⁹ J to −5.4 × 10⁻¹⁹ J. What is the photon energy?","3.0 × 10⁻¹⁹ J",[["7.8 × 10⁻¹⁹ J","Subtract, do not add."],["5.4 × 10⁻¹⁹ J","Use the difference."],["2.4 × 10⁻¹⁹ J","Use the difference."]],"ΔE = 5.4 − 2.4 = 3.0 × 10⁻¹⁹ J.","p"],
+["A photon has energy 3.0 × 10⁻¹⁹ J. What is its frequency?","4.5 × 10¹⁴ Hz",[["2.0 × 10⁻⁵³ Hz","Divide, do not multiply."],["2.2 × 10⁻¹⁵ Hz","That is h ÷ E."],["4.5 × 10¹⁵ Hz","Check the powers of ten."]],"f = E/h = 3.0 × 10⁻¹⁹ ÷ 6.63 × 10⁻³⁴ = 4.5 × 10¹⁴ Hz.","p"],
+["A transition gives a photon of 4.0 × 10⁻¹⁹ J. What is its wavelength?","5.0 × 10⁻⁷ m",[["2.0 × 10⁶ m","Check: λ = hc/E."],["1.3 × 10⁻²⁵ m","Use λ = c/f."],["6.0 × 10¹⁴ m","That is the frequency."]],"f = 6.0 × 10¹⁴ Hz; λ = c/f = 5.0 × 10⁻⁷ m.","p"]
+],
+gap:[
+["Electrons in atoms can only exist in certain [energy] levels. The lowest level is called the [ground] state.",["orbit","base"],"Bohr model."],
+["The energy of an emitted photon equals the [difference] between the two energy [levels].",["sum","masses"],"E₂ − E₁ = hf."]
+],
+sort:[
+["Sort these spectra.",{"Continuous":["a hot filament lamp","a hot solid"],"Line emission":["a hot hydrogen gas discharge tube","a sodium street lamp"],"Line absorption":["sunlight passing through the Sun's outer layers"]},"Source type."],
+["Sort these electron transitions.",{"Photon emitted":["level 3 to level 1","level 2 to ground state"],"Photon absorbed":["ground state to level 2","level 1 to level 3"]},"Down emits, up absorbs."],
+["Sort these: larger or smaller photon energy?",{"Larger photon energy":["bigger gap between levels","higher frequency","shorter wavelength"],"Smaller photon energy":["smaller gap between levels","lower frequency","longer wavelength"]},"E = hf = hc/λ."]
+],
+order:[
+["Put the steps in order to find the wavelength of a spectral line.",["Find the energy difference between the levels.","This is the photon energy.","Use f = E/h.","Use λ = c/f."],"Energy to wavelength."],
+["Put these transitions in order of photon energy, smallest first (levels: E₃ = −1, E₂ = −2, E₁ = −5, all × 10⁻¹⁹ J).",["E₃ to E₂","E₂ to E₁","E₃ to E₁"],"1, 3, 4 × 10⁻¹⁹ J."],
+["Put these stages in order for how an absorption line forms.",["White light passes through a cooler gas.","Electrons absorb photons with exactly the right energy.","They jump to higher levels.","Those frequencies are missing, so dark lines appear."],"Absorption spectrum."]
+],
+build:[
+["Explain why a hot gas produces a line spectrum rather than a continuous one.",["Electrons can only be in certain energy levels.","When they fall between levels they emit photons.","Each photon's energy equals the gap between levels.","Only certain energies, so certain frequencies, are produced."],["The gas only contains one colour of light.","The gas blocks most of the light."],"Discrete levels."],
+["Explain how absorption lines show the elements present in the Sun.",["Light from the Sun's hot core is continuous.","Cooler gases in the outer layers absorb particular frequencies.","These frequencies match the energy gaps of particular elements.","Matching dark lines to known spectra identifies the elements."],["The dark lines show where the Sun is cold.","The dark lines are caused by the Earth's atmosphere only."],"Fingerprints."],
+["Explain what happens when an electron absorbs a photon.",["The photon must have exactly the right energy.","Its energy equals the gap between two levels.","The electron moves up to the higher level.","Photons with other energies are not absorbed."],["Any photon can be absorbed.","The electron leaves the atom every time."],"Exact energy match."]
+],
+spot:[
+["Find the photon energy for a fall from −1.6 to −5.4 (× 10⁻¹⁹ J).",["ΔE = E₂ − E₁","ΔE = −1.6 − (−5.4)","ΔE = 3.8 × 10⁻¹⁹ J","ΔE = 7.0 × 10⁻¹⁹ J"],3,"The difference is 3.8 × 10⁻¹⁹ J."],
+["Describe energy levels.",["Energy levels are negative.","The ground state is the lowest level.","The ionisation level is the most negative.","Electrons emit photons when they fall."],2,"The ionisation level is zero, the highest."],
+["Describe a line emission spectrum.",["It is made by a hot gas.","It shows bright lines.","Each element has its own pattern.","It shows all colours of the rainbow continuously."],3,"That describes a continuous spectrum."]
+],
+write:[
+["State what is meant by the ground state of an atom.",[["(lowest|minimum).{0,20}(energy|level)","Lowest energy level"]],1,"The ground state is the lowest energy level an electron can occupy."],
+["Explain how an emission line is produced.",[["(fall|drop|move down|transition).{0,40}(lower|down)","An electron falls to a lower level"],["photon","Emitting a photon"],["(difference|gap)","Energy equals the gap between levels"]],2,"An excited electron falls from a higher to a lower energy level, emitting a photon. Its energy equals the difference between the levels, giving a specific frequency."],
+["Explain why each element has a unique line spectrum.",[["(energy levels|levels).{0,40}(different|unique|own)|(different|unique).{0,40}(energy levels|levels)","Each element has different energy levels"],["(different|unique|particular).{0,30}(frequencies|wavelengths|photon energies)|(frequenc|wavelength)","So different photon frequencies"]],2,"Each element has its own set of energy levels. The gaps between them are different, so the photons emitted have a unique set of frequencies."]
+]
+});
+
+EX3("rf",{
+mc:[
+["What is the refractive index of a material?","the ratio of the speed of light in a vacuum to its speed in the material",[["the angle light bends through","That is deviation."],["the speed of light in the material","It is a ratio."],["the critical angle","Related but different."]],"n = c/v ≈ sin θ₁/sin θ₂.",""],
+["What is total internal reflection?","all the light reflects back inside a denser medium when θ is greater than the critical angle",[["light refracting along the boundary","That is at the critical angle."],["light passing straight through","That is refraction."],["light being absorbed","It is reflected."]],"Used in optical fibres.",""],
+["What is the critical angle?","the angle of incidence that gives an angle of refraction of 90°",[["the angle where all light refracts","At θc, light grazes the surface."],["the angle where light enters the glass","It is about leaving a denser medium."],["always 45°","It depends on the material."]],"sin θc = 1/n.",""],
+["Light goes from air into glass. What happens to its frequency?","It stays the same.",[["It decreases.","Frequency is fixed by the source."],["It increases.","Only speed and wavelength change."],["It halves.","Not affected."]],"Only v and λ change.","h"],
+["Why is a diamond very sparkly?","It has a high refractive index, so a small critical angle gives lots of total internal reflection.",[["It emits its own light.","It reflects light."],["It has a low refractive index.","Diamond's n is about 2.4."],["It absorbs all colours.","It reflects light inside."]],"Small θc traps light.","h"],
+["Light enters glass at 40° and refracts to 25°. What is the refractive index?","1.52",[["1.6","Use sines, not the angles."],["0.66","That is sin 25 ÷ sin 40."],["1.0","Glass bends light."]],"n = sin 40° ÷ sin 25° = 0.643 ÷ 0.423 = 1.52.","p"],
+["What is the critical angle for glass of refractive index 1.5?","42°",[["56°","That uses tan."],["0.67°","Take the inverse sine."],["90°","That is the refracted angle at θc."]],"sin θc = 1/1.5 = 0.667, θc = 42°.","p"]
+],
+gap:[
+["Refractive index n = sin θ₁ / sin θ₂, where θ₁ is in [air] and θ₂ is in the [material].",["glass","vacuum"],"Angles from the normal."],
+["Total internal reflection occurs when the angle of incidence is [greater] than the [critical] angle.",["less","normal"],"Inside the denser medium."]
+],
+sort:[
+["Sort these: what changes when light enters glass from air?",{"Decreases":["speed","wavelength"],"Unchanged":["frequency"]},"v = fλ."],
+["Sort these angles (glass, θc = 42°) by what happens to light hitting the glass-air surface from inside.",{"Mostly refracts out":["20°","35°"],"Refracts along the surface":["42°"],"Total internal reflection":["50°","70°"]},"Compare with θc."],
+["Sort these uses.",{"Total internal reflection":["optical fibres","prisms in binoculars","endoscopes"],"Refraction":["lenses in glasses","a magnifying glass"]},"Two effects, many uses."]
+],
+order:[
+["Put these in order of critical angle, smallest first.",["diamond (n = 2.4)","glass (n = 1.5)","water (n = 1.33)"],"Higher n, smaller θc."],
+["Put the steps in order to find the refractive index of a glass block.",["Shine a ray into the block at a range of angles.","Measure θ in air and θ in glass each time.","Plot sin θ(air) against sin θ(glass).","The gradient is the refractive index."],"Graph method."],
+["Put these colours in order of refractive index in glass, smallest first.",["red","yellow","green","violet"],"Violet bends most."]
+],
+build:[
+["Explain how an optical fibre carries light.",["Light enters the end of a glass fibre.","It hits the inside surface at an angle bigger than the critical angle.","So it is totally internally reflected.","This repeats along the fibre, so the light stays inside."],["Light passes through the sides of the fibre.","The fibre bends the light by refraction only."],"Repeated TIR."],
+["Explain why a prism splits white light into colours.",["White light contains many wavelengths.","The refractive index of glass is slightly different for each wavelength.","Violet light has the largest n, so it bends most.","So the colours separate into a spectrum."],["The prism adds colours to the light.","All colours bend by the same amount."],"Dispersion."],
+["Explain how to measure the critical angle of a semicircular block.",["Aim a ray at the centre of the flat face from inside the curved side.","Increase the angle of incidence slowly.","Find the angle where the refracted ray just runs along the surface.","Measure this angle from the normal."],["Shine light at the curved side from outside at a slant.","Measure the angle from the surface."],"Find the grazing ray."]
+],
+spot:[
+["Find n when θ(air) = 50° and θ(glass) = 30°.",["n = sin θ(air) ÷ sin θ(glass)","n = sin 50° ÷ sin 30°","n = 50 ÷ 30 = 1.67","n = 1.53"],2,"Use sines: 0.766 ÷ 0.5 = 1.53."],
+["Find θc for water with n = 1.33.",["sin θc = 1/n","sin θc = 1 ÷ 1.33 = 0.75","θc = sin⁻¹ 0.75","θc = 0.75°"],3,"θc = 49°."],
+["Describe total internal reflection.",["It happens inside the denser material.","The angle of incidence is bigger than the critical angle.","Some light still escapes.","All the light is reflected."],2,"No light escapes; all is reflected."]
+],
+write:[
+["State what is meant by the critical angle.",[["angle of incidence","The angle of incidence"],["(refraction|refracted).{0,30}90|90.{0,30}(refract)","Gives an angle of refraction of 90°"]],2,"The critical angle is the angle of incidence that gives an angle of refraction of 90°."],
+["Explain why light slows down when it enters glass.",[["(denser|optically dense|higher refractive index)","Glass is optically denser"],["(n *= *c ?\\/ ?v|refractive index|c ?÷ ?v)","n = c/v, so v is smaller"]],1,"Glass is optically denser than air. Its refractive index is greater than 1, and since n = c/v, the speed of light in glass is less than c."],
+["Describe how to find the refractive index of glass from a graph.",[["sin","Use sines of the angles"],["(plot|graph)","Plot a graph"],["gradient","The gradient is n"]],3,"Measure several pairs of angles in air and glass. Plot sin θ(air) against sin θ(glass). The gradient of the straight line is the refractive index."]
+]
+});
+
+EX3("ac",{
+mc:[
+["What is the peak voltage?","the maximum voltage reached in an a.c. cycle, measured from zero",[["the voltage from crest to trough","That is peak-to-peak."],["the average voltage","The average over a cycle is zero."],["the r.m.s. voltage","r.m.s. is smaller than peak."]],"Vₚ is measured from the middle line.",""],
+["What does the r.m.s. value of an a.c. supply mean?","the d.c. value that would give the same power",[["the peak value","r.m.s. is smaller."],["the average value","The average of a sine wave is zero."],["the value at t = 0","Not a definition."]],"Effective value.",""],
+["The UK mains is quoted as 230 V. Which value is this?","the r.m.s. voltage",[["the peak voltage","Peak is about 325 V."],["the peak-to-peak voltage","That is about 650 V."],["the average voltage","The average is zero."]],"Quoted mains values are r.m.s.",""],
+["How is the frequency found from an oscilloscope trace?","Find the period from the time-base setting, then f = 1/T.",[["Read the y-gain setting.","That gives voltage."],["Count the number of squares vertically.","That is amplitude."],["Use f = V/T.","Not correct."]],"Time-base gives the period.",""],
+["The time-base on an oscilloscope is doubled (e.g. 2 ms/div to 4 ms/div). What happens to the trace of the same signal?","More cycles appear on the screen.",[["Fewer cycles appear.","Each division now shows more time."],["The trace gets taller.","Y-gain controls height."],["The frequency of the signal changes.","The signal is unchanged."]],"Each division covers more time.","h"],
+["A lamp is equally bright on 12 V d.c. and on an a.c. supply. What is the peak a.c. voltage?","17 V",[["12 V","r.m.s. = 12 V, peak is bigger."],["8.5 V","That is 12 ÷ √2."],["24 V","Multiply by √2, not 2."]],"Vₚ = √2 × 12 = 17 V.","h"],
+["An a.c. supply has a peak voltage of 10 V. A d.c. supply of 10 V is used on the same resistor. Which gives more power?","the d.c. supply",[["the a.c. supply","Its r.m.s. is only 7.1 V."],["they give the same","r.m.s. is lower than peak."],["impossible to say","Compare r.m.s. values."]],"V(rms) = 7.1 V < 10 V.","h"],
+["A trace covers 4 divisions per cycle at 5 ms/div. What is the frequency?","50 Hz",[["20 Hz","Check T = 20 ms."],["0.05 Hz","Use seconds."],["200 Hz","f = 1/T with T = 0.02 s."]],"T = 4 × 5 ms = 0.02 s; f = 50 Hz.","p"]
+],
+gap:[
+["The r.m.s. voltage equals the [peak] voltage divided by [√2].",["2","average"],"Vrms = Vp/√2, and Irms = Ip/√2."],
+["On an oscilloscope, the [y-gain] setting gives volts per division. The [time-base] setting gives time per division.",["x-shift","focus"],"Two key controls."],
+["Peak-to-peak voltage is [twice] the [peak] voltage.",["half","r.m.s."],"Crest to trough."]
+],
+sort:[
+["Sort these values for UK mains.",{"230 V":["r.m.s. voltage"],"About 325 V":["peak voltage"],"About 650 V":["peak-to-peak voltage"],"50 Hz":["frequency"]},"Know the mains values."],
+["Sort these oscilloscope settings by what they tell you.",{"Voltage":["y-gain (V/div)","number of vertical divisions"],"Time":["time-base (ms/div)","number of horizontal divisions per cycle"]},"Vertical: voltage. Horizontal: time."],
+["Sort these: bigger or smaller than the peak voltage?",{"Bigger":["peak-to-peak voltage"],"Smaller":["r.m.s. voltage","average voltage over a cycle"]},"Relations between values."]
+],
+order:[
+["Put the steps in order to find the r.m.s. voltage from a trace.",["Count the divisions from the centre to a crest.","Multiply by the y-gain to get Vₚ.","Divide by √2.","Give the answer in volts."],"Peak first, then r.m.s."],
+["Put these in order of size for a 10 V peak a.c. supply, smallest first.",["average value (0 V)","r.m.s. value (7.1 V)","peak value (10 V)","peak-to-peak value (20 V)"],"Relationships."],
+["Put the steps in order to find the frequency from a trace.",["Count the divisions for one complete cycle.","Multiply by the time-base to get T.","Convert T to seconds.","Use f = 1/T."],"Period first."]
+],
+build:[
+["Explain why the r.m.s. value is used for a.c. supplies.",["An a.c. voltage changes all the time.","Its average over a cycle is zero.","The r.m.s. value is the d.c. value that gives the same power.","So it allows a.c. and d.c. to be compared fairly."],["The r.m.s. value is the largest voltage.","The r.m.s. value is the average of the peak and zero."],"Equivalent heating."],
+["Explain how to measure the peak voltage of a signal with an oscilloscope.",["Connect the signal to the oscilloscope input.","Adjust the y-gain so the trace fills the screen.","Count the divisions from the centre line to a peak.","Multiply by the y-gain setting."],["Measure from trough to the next trough.","Use the time-base setting."],"Divisions × V/div."],
+["Explain why a 230 V a.c. supply can deliver the same power as a 230 V d.c. supply.",["230 V is the r.m.s. value of the a.c. supply.","The r.m.s. value is defined as the equivalent d.c. voltage.","So the average power in a resistor is the same.","The a.c. peak voltage (325 V) is higher, but only for an instant."],["The a.c. voltage is 230 V all the time.","a.c. gives more power because its peak is higher."],"Definition of r.m.s."]
+],
+spot:[
+["A trace has a peak of 3 divisions at 2 V/div. Find V(rms).",["Vₚ = 3 × 2 = 6 V","Vrms = Vₚ ÷ √2","Vrms = 6 × 1.41","Vrms = 8.5 V"],2,"Divide by √2: 6 ÷ 1.41 = 4.2 V."],
+["Find the frequency of a signal with one cycle across 5 divisions at 10 ms/div.",["T = 5 × 10 ms","T = 50 ms","f = 1 ÷ 50","f = 0.02 Hz"],2,"Use seconds: f = 1 ÷ 0.05 = 20 Hz."],
+["Describe the mains supply.",["It is a.c.","Its frequency is 50 Hz.","Its peak voltage is 230 V.","It changes direction 100 times a second."],2,"230 V is the r.m.s. value; the peak is about 325 V."]
+],
+write:[
+["State the relationship between peak and r.m.s. current.",[["√2|root 2|sqrt.?2|1\\.41","A factor of √2"],["(I ?rms|r\\.?m\\.?s).{0,30}(peak|Ip)|(peak|Ip).{0,30}(rms|r\\.m\\.s)","Links Irms and Ipeak"]],2,"Irms = Ipeak ÷ √2."],
+["Explain what is meant by the r.m.s. value of an alternating current.",[["d\\.?c\\.?|direct current","The d.c. value"],["(same|equal).{0,20}(power|heating|energy)","That gives the same power"]],2,"The r.m.s. value is the value of direct current that would produce the same power (heating effect) in a resistor."],
+["Describe how to measure the frequency of a.c. using an oscilloscope.",[["time.?base","Use the time-base setting"],["(one|complete|single) (cycle|wave)|period","Measure the period of one cycle"],["f *= *1 ?\\/ ?T|1 ?÷ ?T","f = 1/T"]],2,"Count the number of horizontal divisions for one complete cycle and multiply by the time-base setting to get the period T. Then f = 1/T."]
+]
+});
+
+EX3("ir",{
+mc:[
+["What is a potential divider?","two or more resistors in series that share the supply voltage",[["resistors in parallel","Parallel resistors share current."],["a single variable resistor","It needs at least two parts."],["a battery and a lamp","Not a divider."]],"V₁/V₂ = R₁/R₂.",""],
+["In a potential divider, which resistor has the larger voltage across it?","the larger resistor",[["the smaller resistor","Voltage shares in proportion to R."],["they always have equal voltages","Only if R₁ = R₂."],["the one nearer the positive terminal","Position does not matter."]],"V ∝ R in series.",""],
+["What is the formula for resistors in parallel?","1/Rₜ = 1/R₁ + 1/R₂ + ...",[["Rₜ = R₁ + R₂","That is series."],["Rₜ = R₁ × R₂","Not correct."],["Rₜ = 1/R₁ + 1/R₂","Take the reciprocal at the end."]],"Add reciprocals, then invert.",""],
+["Which quantity is the same across components connected in parallel?","voltage",[["current","Current splits."],["resistance","Can differ."],["power","Depends on resistance."]],"Same p.d. across parallel branches.",""],
+["In a potential divider with an LDR at the top, the light level increases. What happens to the voltage across the fixed resistor at the bottom?","It increases.",[["It decreases.","LDR resistance falls, so it gets a smaller share."],["It stays the same.","The ratio changes."],["It becomes zero.","Not at all."]],"LDR resistance falls in light, so the fixed resistor's share rises.","h"],
+["A thermistor (resistance falls as temperature rises) is in series with a fixed resistor. Where should the output be taken so it rises when it gets hotter?","across the fixed resistor",[["across the thermistor","Its share falls as it warms."],["across the supply","That is constant."],["it cannot be done","It can."]],"The fixed resistor gets a bigger share.","h"],
+["A 4 Ω and 12 Ω resistor are in parallel. What is the combined resistance?","3 Ω",[["16 Ω","That is series."],["0.33 Ω","That is 1/Rₜ."],["8 Ω","Use reciprocals."]],"1/Rₜ = 1/4 + 1/12 = 4/12, Rₜ = 3 Ω.","h"]
+],
+gap:[
+["For two resistors in series, V₁ = [R₁ ÷ (R₁ + R₂)] × Vₛ.",["R₂ ÷ R₁","R₁ × R₂"],"Potential divider rule."],
+["In a series circuit, the [current] is the same everywhere and the [voltages] add up to the supply.",["resistance","currents"],"Series rules."]
+],
+sort:[
+["Sort these sensors by how their resistance changes.",{"Resistance falls":["LDR as light increases","thermistor (NTC) as temperature rises"],"Resistance rises":["LDR as light decreases","thermistor (NTC) as temperature falls"]},"Know the sensor behaviour."],
+["Sort these circuit rules.",{"Series":["Rₜ = R₁ + R₂","same current","voltages add"],"Parallel":["1/Rₜ = 1/R₁ + 1/R₂","same voltage","currents add"]},"Two sets of rules."],
+["Sort these: which equation for power?",{"P = IV":["know current and p.d."],"P = I²R":["know current and resistance"],"P = V²/R":["know p.d. and resistance"]},"Pick by the data."]
+],
+order:[
+["Put the steps in order to find the output of a potential divider.",["Add the resistances to find the total.","Find the fraction R₁/(R₁ + R₂).","Multiply by the supply voltage.","Give the answer in volts."],"Ratio method."],
+["Put these in order of total resistance, smallest first (all 10 Ω resistors).",["three in parallel","two in parallel","one","two in series"],"3.3, 5, 10, 20 Ω."],
+["Put the steps in order to find the current from the supply in a mixed circuit.",["Combine any parallel groups.","Add the series resistances to find Rₜ.","Use I = V/Rₜ.","Check that the answer is sensible."],"Simplify, then Ohm's law."]
+],
+build:[
+["Explain how a potential divider with an LDR can switch on a light when it gets dark.",["As it gets darker, the LDR's resistance increases.","The LDR takes a bigger share of the supply voltage.","The voltage across the LDR rises.","When it is high enough, it switches on a transistor and the lamp."],["The LDR makes light in the dark.","The LDR's resistance falls in the dark."],"Sensor and switch."],
+["Explain why the voltage across each resistor in series depends on its resistance.",["The same current flows through each resistor.","V = IR for each resistor.","A larger R gives a larger V.","So the supply voltage is shared in proportion to resistance."],["Each resistor gets the full supply voltage.","Larger resistors get a smaller voltage."],"Same I, V ∝ R."],
+["Explain why connecting a voltmeter with a low resistance across a resistor in a divider gives a wrong reading.",["The voltmeter is in parallel with the resistor.","A low-resistance meter lowers the combined resistance.","That part now takes a smaller share of the supply.","So the reading is lower than the true voltage."],["The voltmeter adds extra voltage.","A low-resistance voltmeter reads high."],"Loading effect."]
+],
+spot:[
+["Find V across 2 kΩ in series with 6 kΩ on a 12 V supply.",["V₁ = R₁/(R₁ + R₂) × Vₛ","V₁ = 2/(2 + 6) × 12","V₁ = 2/6 × 12","V₁ = 3 V"],2,"2/(2 + 6) = 2/8, giving 3 V."],
+["Find the total resistance of 6 Ω and 3 Ω in parallel.",["1/Rₜ = 1/6 + 1/3","1/Rₜ = 1/6 + 2/6 = 3/6","Rₜ = 3/6 = 0.5 Ω","Rₜ is less than the smallest resistor."],2,"Invert: Rₜ = 6/3 = 2 Ω."],
+["Find the power in a 20 Ω resistor with 0.5 A.",["P = I²R","P = 0.5² × 20","P = 0.5 × 20","P = 10 W"],2,"0.5² = 0.25, so P = 5 W."]
+],
+write:[
+["State the potential divider relationship for two resistors.",[["V ?1 ?\\/ ?V ?2 *= *R ?1 ?\\/ ?R ?2|V₁\\/V₂ *= *R₁\\/R₂|ratio","V₁/V₂ = R₁/R₂"],["(proportion|share)","Voltage shared in proportion to resistance"]],1,"V₁/V₂ = R₁/R₂: the supply voltage is shared in proportion to the resistances."],
+["Explain why the voltage across a thermistor in a divider falls as it gets warmer.",[["resistance.{0,30}(falls|decreases|lower)","Its resistance falls"],["(smaller|less|lower).{0,20}(share|fraction|proportion)|share","It takes a smaller share of the voltage"]],2,"As the thermistor warms, its resistance falls. In a potential divider the voltage is shared in proportion to resistance, so it takes a smaller share."],
+["Describe how to find the resistance of a resistor using a graph.",[["(voltmeter|ammeter|V and I|voltage and current)","Measure V and I"],["(variable|range|different|several)","For several settings"],["gradient","The gradient of V against I is R"]],2,"Measure V and I for a range of settings using a variable supply. Plot V against I; the gradient is R."]
+]
+});
+
+EX3("es",{
+mc:[
+["What is the e.m.f. of a source?","the energy given to each coulomb of charge passing through it",[["the voltage across the external resistor","That is the t.p.d."],["the current from the source","Not a voltage."],["the lost volts","That is Ir."]],"E = V + Ir.",""],
+["What are lost volts?","the p.d. across the internal resistance of a source",[["the voltage lost in the wires","Wires are usually ignored."],["the e.m.f.","e.m.f. is the total."],["the terminal p.d.","That is across the load."]],"Lost volts = Ir.",""],
+["What is the short-circuit current?","the current when the terminals are joined with zero external resistance",[["the current when no load is connected","That is zero."],["the maximum safe current","Not a definition."],["the current in a fuse","Not a definition."]],"I = E/r.",""],
+["More lamps are connected in parallel to a battery. What happens to the terminal p.d.?","It decreases.",[["It increases.","More current means more lost volts."],["It stays the same.","Lost volts change."],["It becomes the e.m.f.","Only with no current."]],"Lower R, bigger I, bigger Ir.","h"],
+["A graph of terminal p.d. against current is a straight line sloping down. What is the y-intercept?","the e.m.f.",[["the internal resistance","That is minus the gradient."],["the short-circuit current","That is the x-intercept."],["the lost volts","Not a fixed value."]],"V = E − Ir.","h"],
+["A cell has e.m.f. 1.5 V and internal resistance 0.5 Ω. It drives 0.6 A. What is the terminal p.d.?","1.2 V",[["1.8 V","Subtract the lost volts."],["0.3 V","That is the lost volts."],["1.5 V","Some volts are lost."]],"V = 1.5 − 0.6 × 0.5 = 1.2 V.","p"],
+["A battery of e.m.f. 9 V has an internal resistance of 1.5 Ω. What is the short-circuit current?","6 A",[["13.5 A","Divide, do not multiply."],["0.17 A","That is r/E."],["9 A","Divide by r."]],"I = E/r = 9 ÷ 1.5 = 6 A.","p"]
+],
+gap:[
+["The terminal potential difference is the e.m.f. minus the [lost] volts. With no current, the t.p.d. equals the [e.m.f.].",["gained","r.m.s."],"V = E − Ir."],
+["On a graph of V against I for a cell, the gradient is −[r] and the y-intercept is [E].",["I","V"],"Straight line."]
+],
+sort:[
+["Sort these values in V = E − Ir.",{"Measured with a voltmeter across the terminals":["terminal p.d."],"Energy per coulomb given by the source":["e.m.f."],"Energy per coulomb lost inside the source":["lost volts"]},"Three voltages."],
+["Sort these: increases or decreases when the external resistance is reduced?",{"Increases":["current","lost volts"],"Decreases":["terminal p.d.","external resistance"],"Stays the same":["e.m.f.","internal resistance"]},"Constant E and r."],
+["Sort these graph features (V against I).",{"y-intercept":["e.m.f."],"gradient":["−internal resistance"],"x-intercept":["short-circuit current"]},"Read the graph."]
+],
+order:[
+["Put the steps in order to find E and r experimentally.",["Connect a variable resistor to the cell, with an ammeter and voltmeter.","Change the resistance and record V and I several times.","Plot V against I.","Read E from the intercept and r from the gradient."],"Graph method."],
+["Put these in order of terminal p.d., highest first (same cell).",["open circuit","large external resistance","small external resistance","short circuit"],"More current, more lost volts."],
+["Put the steps in order to find internal resistance from a single reading.",["Measure the e.m.f. with no current flowing.","Connect a load and measure the t.p.d. and current.","Lost volts = E − V.","r = lost volts ÷ I."],"Two measurements."]
+],
+build:[
+["Explain why car headlights dim when the starter motor is used.",["The starter motor draws a very large current.","This large current causes large lost volts, Ir.","So the terminal p.d. of the battery falls.","The headlights receive less voltage and dim."],["The starter motor uses the headlights' charge.","The battery's e.m.f. drops to zero."],"Lost volts."],
+["Explain why a high-voltage supply for a lab has a large internal resistance.",["A large internal resistance limits the current.","Even with a short circuit, I = E/r is small.","This reduces the risk of harm.","So the supply is safer to use."],["Large internal resistance increases the voltage.","It makes the supply cheaper to run."],"Safety."],
+["Explain why the terminal p.d. of a cell is less than its e.m.f. when a current flows.",["The cell has internal resistance.","When current flows, some energy per coulomb is used inside the cell.","These are the lost volts, Ir.","So the t.p.d. is E − Ir, less than E."],["The voltmeter uses up some of the e.m.f.","The external resistor adds to the e.m.f."],"Internal resistance."]
+],
+spot:[
+["A cell (E = 2 V, r = 0.4 Ω) drives 1.5 A. Find the t.p.d.",["Lost volts = Ir","Lost volts = 1.5 × 0.4 = 0.6 V","t.p.d. = 2 + 0.6","t.p.d. = 2.6 V"],2,"t.p.d. = 2 − 0.6 = 1.4 V."],
+["Find r from E = 6 V, V = 5 V and I = 2 A.",["Lost volts = 6 − 5 = 1 V","r = lost volts ÷ I","r = 1 × 2","r = 2 Ω"],2,"r = 1 ÷ 2 = 0.5 Ω."],
+["Describe the V-I graph of a cell.",["It is a straight line.","It slopes downwards.","The y-intercept is the internal resistance.","The gradient is −r."],2,"The y-intercept is the e.m.f."]
+],
+write:[
+["State what is meant by the e.m.f. of a cell.",[["energy","Energy"],["(coulomb|unit charge|per charge)","Per coulomb"],["(supplied|given|converted|transferred)","Given by the source"]],2,"The e.m.f. is the energy supplied to each coulomb of charge passing through the source."],
+["Explain why the terminal p.d. of a battery falls as more current is drawn.",[["(internal resistance|r )","The battery has internal resistance"],["(lost volts|Ir)","Lost volts = Ir increases"],["(V|t\\.?p\\.?d\\.?) *= *E *- *Ir|E ?− ?Ir","V = E − Ir"]],2,"The battery has internal resistance. As current increases, the lost volts (Ir) increase, so the terminal p.d., V = E − Ir, decreases."],
+["Describe how to measure the e.m.f. of a cell directly.",[["voltmeter","Use a voltmeter"],["(no|zero).{0,20}current|open circuit|high resistance","With no current flowing (open circuit)"]],2,"Connect a high-resistance voltmeter across the cell with no other circuit (open circuit), so almost no current flows. The reading equals the e.m.f."]
+]
+});
+
+EX3("cp",{
+mc:[
+["What is capacitance?","the charge stored per volt",[["the energy stored per coulomb","That is p.d."],["the current per volt","That is conductance."],["the time to charge","That depends on RC."]],"C = Q/V.",""],
+["What is the unit of capacitance?","farad (F)",[["coulomb (C)","That is charge."],["henry (H)","That is inductance."],["ohm (Ω)","That is resistance."]],"1 F = 1 C/V.",""],
+["What does the area under a charge-p.d. graph for a capacitor give?","the energy stored",[["the capacitance","That is the gradient."],["the current","Not from this graph."],["the charge","That is read off the y-axis."]],"E = ½QV.",""],
+["How does the current change as a capacitor charges through a resistor?","It starts at a maximum and falls to zero.",[["It starts at zero and rises.","It is largest at the start."],["It stays constant.","It decreases as V across C rises."],["It rises then falls.","It falls from the start."]],"As Vc rises, less p.d. across R.",""],
+["A larger resistor is used to charge the same capacitor. Which is true?","It takes longer to charge, but the final charge is the same.",[["It charges faster.","More resistance, less current."],["The final charge is bigger.","Q = CV, and V is unchanged."],["The final charge is smaller.","Final charge depends on C and V only."]],"R affects time, not final Q.","h"],
+["A 470 μF capacitor is charged to 12 V. How much charge does it store?","5.6 × 10⁻³ C",[["5640 C","Convert μF to F."],["3.9 × 10⁻⁵ C","Multiply, do not divide."],["5.6 C","Check the powers of ten."]],"Q = CV = 470 × 10⁻⁶ × 12 = 5.6 × 10⁻³ C.","p"],
+["A 2000 μF capacitor is charged to 9 V. How much energy does it store?","0.081 J",[["0.162 J","Use ½CV²."],["0.018 J","Square the voltage."],["81 J","Convert μF to F."]],"E = ½ × 2 × 10⁻³ × 81 = 0.081 J.","p"]
+],
+gap:[
+["When a capacitor is fully charged, the p.d. across it equals the [supply] voltage and the current is [zero].",["peak","maximum"],"Charging stops."],
+["The energy stored in a capacitor is E = ½QV = ½[CV²] = ½Q²/C.",["CV","QC"],"Three versions."]
+],
+sort:[
+["Sort these during charging.",{"Increases":["p.d. across capacitor","charge stored","energy stored"],"Decreases":["current","p.d. across the resistor"]},"Charging curves."],
+["Sort these during discharge.",{"Decreases":["p.d. across capacitor","charge stored","current size"],"Stays the same":["capacitance"]},"Discharging curves."],
+["Sort these uses of capacitors.",{"Store energy":["camera flash","defibrillator"],"Timing":["delay circuit for a light"],"Smoothing":["smoothing a rectified supply"]},"Many uses."]
+],
+order:[
+["Put the steps in order to find capacitance from a graph.",["Charge the capacitor to several voltages.","Measure the charge stored each time with a coulombmeter.","Plot Q against V.","The gradient is C."],"C = Q/V."],
+["Put the stages in order as a capacitor charges from a battery.",["The switch is closed: the current is a maximum.","Charge builds up on the plates.","The p.d. across the capacitor rises, so the current falls.","The p.d. equals the supply, and the current is zero."],"Charging sequence."],
+["Put these in order of energy stored, smallest first.",["100 μF at 10 V","100 μF at 20 V","1000 μF at 10 V","1000 μF at 20 V"],"5 mJ, 20 mJ, 50 mJ, 200 mJ."]
+],
+build:[
+["Explain why the charging current decreases.",["Charge builds up on the plates.","The p.d. across the capacitor increases.","The p.d. across the resistor is Vₛ − Vc, which decreases.","So I = V(R)/R decreases."],["The capacitor uses up current.","The battery runs out."],"Opposing p.d."],
+["Explain why the energy stored is ½QV and not QV.",["Charge is added gradually.","The p.d. increases from 0 to V as the capacitor charges.","The average p.d. during charging is ½V.","So the work done is ½QV."],["Half of the charge is lost.","Capacitors are 50% efficient."],"Area of triangle."],
+["Explain how a capacitor can keep a light on for a short time after the supply is switched off.",["The capacitor is charged while the supply is on.","When the supply goes off, it discharges through the lamp.","The current falls gradually.","So the lamp dims and goes out after a short time."],["The capacitor makes new charge.","The lamp stays on forever."],"Stored charge."]
+],
+spot:[
+["Find E for 100 μF at 50 V.",["E = ½CV²","E = ½ × 100 × 10⁻⁶ × 50","E = 2.5 × 10⁻³ J","Energy is stored in the electric field."],1,"V must be squared: ½ × 10⁻⁴ × 2500 = 0.125 J."],
+["Describe a discharging capacitor.",["The current is largest at the start.","The p.d. decreases.","The current direction is the same as charging.","The charge decreases to zero."],2,"The current is in the opposite direction to charging."],
+["Find C when 6 × 10⁻³ C is stored at 12 V.",["C = Q/V","C = 6 × 10⁻³ ÷ 12","C = 5 × 10⁻⁴ F","C = 500 F"],3,"5 × 10⁻⁴ F is 500 μF."]
+],
+write:[
+["State what is meant by a capacitance of 1 farad.",[["(one|1) ?(coulomb|C)","One coulomb"],["(per|each|for).{0,10}(one|1|every)? ?(volt|V)","Per volt"]],2,"A capacitance of 1 F means 1 C of charge is stored for each 1 V of p.d. across it."],
+["Explain why increasing the resistance makes the capacitor take longer to charge.",[["(current|I).{0,30}(smaller|less|lower|reduc)","The current is smaller"],["(charge|Q).{0,30}(slow|longer|per second)|rate","Charge builds up more slowly"],["(same|unchanged).{0,30}(final|total|maximum)","Final charge is the same"]],2,"A bigger resistance makes the current smaller, so charge builds up on the plates more slowly. The final charge, Q = CV, is the same."],
+["Describe how to measure the energy stored in a capacitor using a graph.",[["(Q|charge).{0,30}(V|p\\.?d\\.?|voltage)","Plot Q against V"],["area","Find the area under the graph"]],2,"Measure the charge stored at several p.d.s and plot Q against V. The energy stored is the area under the graph, ½QV."]
+]
+});
+
+EX3("sc",{
+mc:[
+["What happens when a p-n junction is forward biased?","Current flows, as charge carriers cross the junction.",[["No current flows.","That is reverse bias."],["The depletion layer gets wider.","That is reverse bias."],["Light is absorbed.","That is a photodiode."]],"Forward bias lowers the barrier.","h"],
+["In an LED, what happens at the junction?","Electrons and holes recombine, emitting photons.",[["Photons create electrons.","That is a photodiode."],["Electrons gain energy.","They lose energy."],["The junction heats up only.","Light is emitted."]],"Recombination releases energy as light.","h"],
+["An LED gives out photons of 3.2 × 10⁻¹⁹ J. What is the frequency of the light?","4.8 × 10¹⁴ Hz",[["2.1 × 10⁻⁵² Hz","Divide, do not multiply."],["2.1 × 10⁻¹⁵ Hz","That is h ÷ E."],["4.8 × 10¹⁵ Hz","Check the powers of ten."]],"f = E/h = 3.2 × 10⁻¹⁹ ÷ 6.63 × 10⁻³⁴ = 4.8 × 10¹⁴ Hz.","p"],
+["An LED emits light of wavelength 620 nm. What is the photon energy?","3.2 × 10⁻¹⁹ J",[["1.2 × 10⁻⁴⁰ J","Use E = hc/λ."],["4.8 × 10¹⁴ J","That is the frequency."],["3.2 × 10⁻²⁸ J","Convert nm to m correctly."]],"E = hc/λ = 6.63 × 10⁻³⁴ × 3 × 10⁸ ÷ 620 × 10⁻⁹ = 3.2 × 10⁻¹⁹ J.","p"],
+["An LED needs 2.0 V and 20 mA. It is used with a 9 V supply. What series resistor is needed?","350 Ω",[["450 Ω","Subtract the LED voltage first."],["100 Ω","That uses 2 V."],["0.35 Ω","Use amps: 20 mA = 0.02 A."]],"R = (9 − 2) ÷ 0.02 = 350 Ω.","p"],
+["A photodiode in photovoltaic mode receives more light. What happens?","The p.d. it produces increases.",[["The p.d. decreases.","More photons, more pairs."],["Nothing changes.","It responds to light."],["It emits light.","That is an LED."]],"More photons, more electron-hole pairs.","p"],
+["A semiconductor needs photons of at least 1.8 × 10⁻¹⁹ J to create electron-hole pairs. What is the minimum frequency of light a photodiode made from it can detect?","2.7 × 10¹⁴ Hz",[["1.2 × 10⁻⁵² Hz","Divide by h."],["3.7 × 10⁻¹⁵ Hz","That is h ÷ E."],["2.7 × 10¹⁵ Hz","Check the powers of ten."]],"f = E/h = 2.7 × 10¹⁴ Hz.","p"]
+],
+gap:[
+["In an n-type semiconductor the majority charge carriers are [electrons]. In p-type they are [holes].",["protons","neutrons"],"Doping."],
+["Doping adds a small amount of [impurity] to a pure semiconductor to increase its [conductivity].",["insulation","resistance"],"n-type and p-type."]
+],
+sort:[
+["Sort these by band theory.",{"Conductor":["copper","a metal with overlapping bands"],"Semiconductor":["silicon","germanium"],"Insulator":["glass","a material with a large band gap"]},"Band gap size."],
+["Sort these devices by what they do.",{"Light in, electricity out":["photodiode","solar cell"],"Electricity in, light out":["LED"]},"Opposite processes."],
+["Sort these: forward or reverse bias?",{"Forward bias":["p-type connected to positive","current flows","depletion layer narrows"],"Reverse bias":["p-type connected to negative","almost no current","depletion layer widens"]},"Biasing a junction."]
+],
+order:[
+["Put these in order of band gap, smallest first.",["metal (no gap)","germanium","silicon","glass"],"Bigger gap, fewer free electrons."],
+["Put the stages in order for how an LED emits light.",["The LED is forward biased.","Electrons move from the n-type into the p-type.","Electrons fall from the conduction band into holes.","The energy released is emitted as a photon."],"Recombination."],
+["Put the stages in order for how a solar cell produces a p.d.",["Photons are absorbed at the junction.","Each photon creates an electron-hole pair.","The electric field at the junction separates them.","Charge builds up on each side, giving a p.d."],"Photovoltaic effect."]
+],
+build:[
+["Explain why the resistance of a semiconductor falls as it is heated.",["Heating gives electrons more energy.","More electrons can jump the band gap into the conduction band.","This leaves more holes in the valence band.","So there are more charge carriers, and resistance falls."],["Heating makes the atoms vibrate less.","Heating removes the band gap."],"More carriers."],
+["Explain why an LED needs a series resistor.",["An LED needs only a small voltage, about 2 V.","Without a resistor, the current would be too large.","The resistor takes the rest of the supply voltage.","This limits the current to a safe value."],["The resistor makes the LED brighter.","The resistor converts a.c. to d.c."],"Current limiting."],
+["Explain how doping makes n-type silicon.",["Silicon atoms each have four outer electrons.","An impurity atom with five outer electrons is added.","Four bond with silicon, leaving one spare electron.","These spare electrons are free to conduct."],["Electrons are removed from silicon.","Protons are added to the silicon."],"Donor impurities."]
+],
+spot:[
+["Describe a forward-biased p-n junction.",["The p-type is connected to the positive terminal.","The depletion layer gets narrower.","Electrons and holes can cross the junction.","No current flows."],3,"Current flows in forward bias."],
+["Find the photon energy for a 500 nm LED.",["E = hc/λ","E = 6.63 × 10⁻³⁴ × 3 × 10⁸ ÷ 500","E = 4.0 × 10⁻²⁸ J","λ must be in metres."],2,"Use 500 × 10⁻⁹ m: E = 4.0 × 10⁻¹⁹ J."],
+["Describe band theory for an insulator.",["The valence band is full.","The conduction band is empty.","The band gap is very small.","So there are no free charge carriers."],2,"An insulator has a large band gap."]
+],
+write:[
+["State what is meant by doping.",[["(add|adding|introduc)","Adding"],["(impurit|other atoms|different atoms)","Impurity atoms"],["(semiconductor|silicon|germanium)","To a semiconductor"]],2,"Doping is adding a small amount of impurity atoms to a pure semiconductor to change its conductivity."],
+["Explain how light is produced in an LED.",[["forward bias","When forward biased"],["(recombin|fall.{0,30}(hole|valence)|holes)","Electrons recombine with holes"],["photon","Releasing photons"]],2,"When the LED is forward biased, electrons cross the junction and recombine with holes, falling to a lower energy level. The energy is released as photons."],
+["Explain why a photodiode produces a current when light shines on it.",[["photon","Photons are absorbed"],["(electron.?hole|pairs)","Creating electron-hole pairs"],["(separat|field|junction)","Separated by the junction field"]],2,"Photons are absorbed at the junction, each creating an electron-hole pair. The electric field at the junction separates them, producing a p.d. and a current."]
+]
+});
+
+EX3("words",{
+mc:[
+["What does 'show that' mean in a Higher calculation question?","You must show all the working, even though the answer is given.",[["Just write down the given answer.","No marks without working."],["Draw a diagram.","Not what it means."],["Explain in words only.","Working is needed."]],"Final answer is given; marks are for the method.",""],
+["A question says 'Using your knowledge of physics, comment on...'. What kind of question is this?","an open-ended question",[["a calculation","It has no single answer."],["a state question","It needs explanation."],["a multiple choice question","It is extended writing."]],"Up to 3 marks for depth of understanding.","h"],
+["A calculation gives 4.6372 N from data with 3 sig figs. What should be written?","4.64 N",[["4.6372 N","Too many sig figs."],["5 N","Too few."],["4.6 N","2 sig figs is acceptable but 3 matches."]],"Match the data.","p"],
+["An answer is 0.00340 m. How many significant figures does it have?","3",[["5","Leading zeros do not count."],["2","The trailing zero counts."],["6","Count from the first non-zero digit."]],"3, 4, 0.","p"],
+["A pupil finds v = 18 m/s but takes up as positive and the answer should be downwards. What should she write?","−18 m/s (or 18 m/s downwards)",[["18 m/s","Direction is missing."],["18","Unit and direction missing."],["−18","Unit missing."]],"Vector answers need direction.","p"],
+["Data: m = 2.50 kg, a = 1.2 m/s². What is F to the right number of sig figs?","3.0 N",[["3 N","1 sig fig is too few."],["3.00 N","1.2 has only 2 sig figs."],["3.000 N","Too many."]],"F = 3.0 N (2 sig figs).","p"],
+["Which unit is written correctly for acceleration?","m s⁻²",[["ms⁻²","That reads as milliseconds."],["m/s","That is velocity."],["m s²","Negative index needed."]],"Spacing matters: m s⁻².","p"]
+],
+gap:[
+["A 'determine' question asks you to find a value, often from a [graph] or [data].",["opinion","story"],"Find a number."],
+["In a 'show that' question, give the answer to at least one more significant [figure] than the value [given].",["line","asked"],"Show the extra precision."],
+["In open-ended questions, marks are given for depth of [understanding], not for the [length] of the answer.",["handwriting","number of words"],"Quality over quantity."]
+],
+sort:[
+["Sort these command words.",{"Needs a calculation":["calculate","determine","show that"],"Needs words only":["state","describe","explain"]},"Read the question."],
+["Sort these: good or poor practice in calculations.",{"Good":["writing the equation first","keeping full values until the end","giving units"],"Poor":["rounding at each step","leaving out the substitution","giving too many sig figs"]},"Exam technique."],
+["Sort these words by meaning.",{"Means 'give a reason'":["explain","justify"],"Means 'give a short fact'":["state","name"],"Means 'say what happens'":["describe"]},"Command words."]
+],
+order:[
+["Put the steps in order for a 'show that' question.",["Write the equation.","Substitute the values with units.","Calculate the answer.","Give it to one more sig fig than the given value."],"Show everything."],
+["Put the steps in order to tackle a long, multi-part question.",["Read the whole question and the diagram.","Note what is given and what is asked.","Answer each part in order, using earlier answers if needed.","Check units and significant figures."],"Plan first."],
+["Put these in order of the depth of answer needed, least first.",["state","describe","explain","comment on (open-ended)"],"More marks, more depth."]
+],
+build:[
+["Build a strong open-ended answer about why astronauts float in the ISS.",["Gravity still acts on the astronauts and the ISS.","Both are in free fall around the Earth.","They accelerate towards Earth at the same rate.","So there is no reaction force between them, giving the feeling of weightlessness."],["There is no gravity in space.","Astronauts lose their mass in orbit."],"Correct physics, clearly linked."],
+["Build a good answer to 'Explain why the current in a photocell increases when the irradiance increases.'",["Higher irradiance means more photons per second.","Each photon can release one electron.","So more electrons are released per second.","The current is the charge flowing per second, so it increases."],["Each photon has more energy.","The electrons move faster."],"Linked reasoning."],
+["Build a good answer to 'Justify whether the collision is elastic.'",["Calculate the total kinetic energy before.","Calculate the total kinetic energy after.","The kinetic energy after is less than before.","So the collision is inelastic."],["Momentum is conserved, so it is elastic.","Elastic means the objects bounce."],"Give the evidence and the conclusion."]
+],
+spot:[
+["Answer to 'Show that the speed is about 15 m/s.'",["v² = u² + 2as","v² = 0 + 2 × 9.8 × 11.5","v² = 225.4","v = 15 m/s"],3,"Give one more sig fig: v = 15.0 m/s."],
+["Advice for writing units.",["The unit of acceleration is m s⁻².","The unit of momentum is kg m s⁻¹.","The unit of power is W.","The unit of frequency is s."],3,"Frequency is in Hz (s⁻¹)."],
+["Advice for open-ended questions.",["Use relevant physics.","Explain your ideas clearly.","Write as much as possible to get full marks.","Show a good understanding of the situation."],2,"Marks are for understanding, not length."]
+],
+write:[
+["State what is required in a 'show that' question.",[["(all|full).{0,20}working|working","Show all the working"],["(sig|significant|more figures|extra figure)","Give the answer to more sig figs than given"]],2,"Show all the working (equation, substitution, answer). Give the final answer to at least one more significant figure than the value given."],
+["Explain why rounding during a calculation can lose marks.",[["(error|inaccura|wrong)","It introduces errors"],["(final answer|end)","The final answer may be wrong"]],2,"Rounding during the working introduces errors that build up, so the final answer may be wrong. Keep full values until the end."],
+["Give two features of a good answer to an open-ended question.",[["(physics|principle|law|concept)","Uses relevant physics"],["(clear|logical|structured|linked)","Clear, logical reasoning"],["(understanding|depth)","Shows depth of understanding"],["(diagram|equation)","Uses diagrams or equations"]],2,"Any two: uses relevant physics principles; clear, logical reasoning; shows depth of understanding; uses equations or diagrams where helpful."]
+]
+});
+
+EX3("skills",{
+mc:[
+["What is the percentage uncertainty in a reading of 2.0 ± 0.1 s?","5%",[["0.05%","Multiply by 100."],["10%","Check: 0.1 ÷ 2.0."],["2%","Check: 0.1 ÷ 2.0 × 100."]],"0.1 ÷ 2.0 × 100 = 5%.",""],
+["Two readings are multiplied together in a calculation. How is the uncertainty in the answer usually estimated?","Take the largest percentage uncertainty of the readings.",[["Add the absolute uncertainties.","That is for adding values."],["Use the smallest uncertainty.","Use the largest."],["Ignore uncertainties.","They matter."]],"Higher method: largest percentage uncertainty.","h"],
+["A digital meter reads 3.47 V. What is its scale reading uncertainty?","± 0.01 V",[["± 0.005 V","For digital meters, ± 1 in the last digit."],["± 0.1 V","Too large."],["± 0.47 V","Not a scale uncertainty."]],"± 1 in the least significant digit.","h"],
+["What is the scale reading uncertainty of an analogue ruler marked in mm?","± 0.5 mm",[["± 1 mm","That is for digital scales."],["± 0.1 mm","Too small."],["± 1 cm","Too large."]],"Half the smallest division.","h"],
+["Readings: 1.24, 1.30, 1.28, 1.22 s. What is the random uncertainty?","± 0.02 s",[["± 0.08 s","Divide the range by 4."],["± 1.26 s","That is the mean."],["± 0.04 s","Check: 0.08 ÷ 4."]],"(1.30 − 1.22) ÷ 4 = 0.02 s.","p"],
+["A length is 50.0 ± 0.5 cm and time is 2.00 ± 0.04 s. What is the percentage uncertainty in the speed?","2%",[["1%","Use the largest, which is 2%."],["3%","Higher method uses the largest, not the sum."],["0.5%","That is not a percentage."]],"Length 1%, time 2%: largest is 2%.","p"],
+["v = 3.0 m/s with an uncertainty of 4%. What is the absolute uncertainty?","± 0.12 m/s",[["± 4 m/s","Convert from %."],["± 0.4 m/s","4% of 3.0 is 0.12."],["± 0.012 m/s","Check the decimal place."]],"0.04 × 3.0 = 0.12 m/s.","p"]
+],
+gap:[
+["The three main types of uncertainty are random, [scale] reading and [systematic].",["human","digital"],"Know all three."],
+["The percentage uncertainty is the absolute [uncertainty] divided by the [measured] value, × 100.",["mean","expected"],"Relative size."],
+["A systematic uncertainty shifts every reading by the [same] amount. It is shown on a graph by a non-zero [intercept].",["random","gradient"],"Zero errors."]
+],
+sort:[
+["Sort these into types of uncertainty.",{"Random":["scatter in repeated timings","variation in reaction time"],"Scale reading":["± half a division on a ruler","± 1 in last digit on a meter"],"Systematic":["a meter that reads 0.2 V with nothing connected","a balance that is not zeroed"]},"Three types."],
+["Sort these improvements.",{"Reduces random uncertainty":["take more repeated readings","measure a larger quantity (e.g. 20 swings)"],"Reduces systematic uncertainty":["zero the instrument","calibrate against a standard"]},"Different fixes."],
+["Sort these: precise or accurate?",{"Precise":["readings close together","small random uncertainty"],"Accurate":["mean close to the true value","small systematic error"]},"Two different ideas."]
+],
+order:[
+["Put the steps in order to find the uncertainty in a calculated value.",["Find the percentage uncertainty of each measured quantity.","Choose the largest percentage uncertainty.","Apply it to the calculated value.","Write the answer as value ± absolute uncertainty."],"Higher method."],
+["Put the steps in order to find random uncertainty.",["Take several readings.","Find the mean.","Find the range (max − min).","Divide the range by the number of readings."],"Standard Higher method."],
+["Put the steps in order to plot a graph with error bars.",["Plot each mean point.","Draw vertical bars showing ± the uncertainty.","Draw a best-fit line through the error bars.","Use the line to find the gradient."],"Error bars guide the line."]
+],
+build:[
+["Explain how to decide which measurement to improve in an experiment.",["Find the percentage uncertainty of each measurement.","The one with the largest percentage uncertainty dominates.","Improving that measurement reduces the overall uncertainty most.","Improving the others has little effect."],["Always improve the measurement with the most digits.","Improve the smallest measurement first."],"Target the biggest %."],
+["Explain why timing 20 oscillations reduces the uncertainty in the period.",["The reaction-time uncertainty is about the same for any timing.","With 20 oscillations, the total time is much longer.","So the percentage uncertainty is smaller.","Dividing by 20 gives the period with smaller uncertainty."],["20 oscillations make the pendulum swing faster.","It removes systematic errors."],"Bigger measurement, smaller %."],
+["Explain how a systematic error can be spotted from a graph.",["Theory predicts a straight line through the origin.","The best-fit line has a non-zero intercept.","Every point is shifted by the same amount.","This suggests a systematic error such as a zero error."],["The points scatter randomly.","The gradient is negative."],"Intercept shows offset."]
+],
+spot:[
+["Find the % uncertainty in 4.0 ± 0.2 V.",["% uncertainty = (0.2 ÷ 4.0) × 100","= 0.05 × 100","= 5%","= 0.05%"],3,"The answer is 5%."],
+["Describe how to reduce random uncertainty.",["Repeat the measurement several times.","Find the mean.","Zero the meter first.","Measure a larger quantity if possible."],2,"Zeroing a meter reduces systematic, not random, uncertainty."],
+["State a value with its uncertainty.",["The mean is 9.73 m s⁻².","The uncertainty is 0.24 m s⁻².","Write g = 9.73 ± 0.24 m s⁻².","Round the uncertainty and match decimal places: 9.7 ± 0.2 m s⁻²."],2,"The full answer should be rounded: 9.7 ± 0.2 m s⁻²."]
+],
+write:[
+["State what is meant by a systematic uncertainty.",[["(same|constant|consistent).{0,30}(amount|every|each|all)|every.{0,30}(same|shifted|too)","Shifts every reading the same way"],["(zero error|calibrat|instrument|method)","From the instrument or method"]],2,"A systematic uncertainty shifts every reading by the same amount in the same direction, for example from a zero error or poor calibration of the instrument."],
+["Explain why repeating readings reduces random uncertainty but not systematic uncertainty.",[["random.{0,40}(scatter|vary|both sides|above and below|cancel)","Random errors scatter both ways and average out"],["systematic.{0,40}(same|every|one direction|all)","Systematic errors shift all readings the same way"]],2,"Random errors scatter readings above and below the true value, so averaging repeated readings reduces them. Systematic errors shift every reading in the same direction, so averaging does not remove them."],
+["Describe how to find the scale reading uncertainty of an analogue and a digital meter.",[["analogue.{0,40}(half|½|0\\.5)","Analogue: half the smallest division"],["digital.{0,40}(1|one|last digit|least significant)","Digital: ±1 in the last digit"]],2,"For an analogue scale, ± half the smallest division. For a digital meter, ± 1 in the last (least significant) digit."]
+]
+});
+
+/*X3END*/
 const TYPES={K:"Key words",TF:"True or false",M:"Multiple choice",H:"Hinge question",P:"Problem solving",G:"Fill the gaps",S:"Sort",O:"Put in order",B:"Build an answer",X:"Spot the mistake",W:"Written answer"};
 const PRESETS=[["All types",Object.keys(TYPES)],["Literacy",["K","G","B","X","W"]],["Knowledge",["K","TF","M","H"]],["Problem solving",["P","H","O","W","S"]]];
 const $=s=>document.querySelector(s);
@@ -1435,7 +2314,7 @@ function expand(t){
   const items=[];let n=0;
   const add=o=>{o.id=t.key+"."+(++n);o.topic=t.key;items.push(o);};
   /* originals first, then later additions, so existing question numbers never change */
-  [t.d,t.x,t.x2].forEach(d=>{if(d)expandPart(d,add);});
+  [t.d,t.x,t.x2,t.x3].forEach(d=>{if(d)expandPart(d,add);});
   return items;
 }
 function expandPart(d,add){
